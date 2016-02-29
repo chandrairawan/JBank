@@ -1,9 +1,10 @@
 
 /**
- * JBank Phase 1.
+ * JBank Phase 2.
  * 
  * @author (Abdul Chandra Irawan) 
- * @version (20-02-2016)
+ * @version (27-02-2016)
+ * 
  */
 public class Account
 {
@@ -11,28 +12,45 @@ public class Account
     private char acctType;
     private double balance;
     private String id;
+    private double predictBalance;
     
     public Account() {//membuat fungsi Account
+        
     }
+    
     public Account(char type, double amount) {//membuat fungsi Account
+        
     }
+    
     private void deposit(double amount) {//membuat fungsi deposit
+        
     }
+    
     public char getAcctType() {//membuat fungsi getAccType
-        return '\0';
+        return acctType; //mengembalikan nilai atribut acctType untuk metode ini  
     }
-    private double getBalance() {//membuat fungsi getBalance
-        return 0;
+    
+    public double getBalance() {//membuat fungsi getBalance
+        return balance;
     }
+    
     public String getId() {//membuat fungsi getId
-        return "";
+        return id; //mengembalikan nilai atribut acctType untuk metode ini
     }
-    private void setBalance(double amount) {//membuat fungsi setBalance
+    
+    public void setBalance(double amount) {//membuat fungsi setBalance
+        balance = amount; //memberikan nilai amount untuk atribut objek balance
     }
+    
     public void setID(String acctId) {//membuat fungsi setID
+        id = acctId; //memberikan nilai acctId untuk atribut objek ID
     }
-    public void setAcctType() {//membuat fungsi setAccType
+    
+    public void setAcctType(char code) {//membuat fungsi setAccType
+        acctType = code; //menetapkan type dari acctType ke objek atribut acctType
     }
-    private void withdraw(double amount) {//membuat fungsi withdraw
+    
+    public void withdraw(double amount) {//membuat fungsi withdraw
+        
     }
 }
