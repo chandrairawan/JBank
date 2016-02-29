@@ -1,56 +1,114 @@
 
 /**
- * JBank Phase 2.
+ * JBank Program
+ * Account class
  * 
- * @author (Abdul Chandra Irawan) 
- * @version (27-02-2016)
- * 
+ * @author Abdul Chandra Irawan - 1306405244 
+ * @version 27.02.2016
  */
 public class Account
 {
-    //deklarasi variabel
+    /**
+     * Deklarasi variabel
+     */
     private char acctType;
     private double balance;
     private String id;
     private double predictBalance;
     
-    public Account() {//membuat fungsi Account
+    /**
+     * membuat fungsi Account
+     */
+    public Account() {
         
     }
     
-    public Account(char type, double amount) {//membuat fungsi Account
+    /**
+     * membuat fungsi Account
+     */
+    public Account(char type, double amount) {
         
     }
     
-    private void deposit(double amount) {//membuat fungsi deposit
-        
+    /**
+     * membuat fungsi deposit
+     * @param amount tidak boleh negatif
+     */
+    public void deposit(double amount) {
+        if (amount > 0)
+        {
+            balance = balance + amount;
+            System.out.println("True");
+        }
+        else
+        {
+            System.out.println("False");
+        }
     }
     
-    public char getAcctType() {//membuat fungsi getAccType
-        return acctType; //mengembalikan nilai atribut acctType untuk metode ini  
+    /**
+     * membuat fungsi getAccType
+     * @return atribut acctType
+     */
+    public char getAcctType() {
+        return acctType;
     }
     
-    public double getBalance() {//membuat fungsi getBalance
+    /**
+     * membuat fungsi getBalance
+     * @return balance
+     */
+    public double getBalance() {
         return balance;
     }
     
-    public String getId() {//membuat fungsi getId
-        return id; //mengembalikan nilai atribut acctType untuk metode ini
+    /**
+     * membuat fungsi getId
+     * @return id
+     */
+    public String getId() {
+        return id; 
     }
     
-    public void setBalance(double amount) {//membuat fungsi setBalance
-        balance = amount; //memberikan nilai amount untuk atribut objek balance
+    /**
+     * membuat fungsi setBalance
+     * @param amount untuk atribut objek balance
+     */
+    public void setBalance(double amount) {
+        balance = amount;
     }
     
-    public void setID(String acctId) {//membuat fungsi setID
-        id = acctId; //memberikan nilai acctId untuk atribut objek ID
+    /**
+     * membuat fungsi setID
+     * @param acctId untuk atribut objek ID
+     */
+    public void setID(String acctId) {
+        id = acctId;
     }
     
-    public void setAcctType(char code) {//membuat fungsi setAccType
-        acctType = code; //menetapkan type dari acctType ke objek atribut acctType
+    /**
+     * membuat fungsi setAccType
+     * @param code dari acctType ke objek atribut acctType
+     */
+    public void setAcctType(char code) {
+        acctType = code;
     }
     
-    public void withdraw(double amount) {//membuat fungsi withdraw
+    /**
+     * membuat fungsi withdraw
+     * @param amount, jumlah penarikan tidak boleh membuat balance menjadi negatif
+     */
+    public void withdraw(double amount) {
+        predictBalance = balance - amount;
         
+        if (predictBalance < 0)
+        {
+            System.out.println("false");
+        }
+        else
+        {
+            balance = balance - amount;
+            System.out.println("true");
+        }
     }
 }

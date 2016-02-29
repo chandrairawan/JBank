@@ -1,0 +1,20 @@
+a. Menulis Dokumentasi No. 4
+
+Pertanyaan: Apa perbedaan antara JavaDoc-format comment, single-line comment, dan
+multi-line comment?
+
+Jawaban :
+1. Single-line comment, contoh:
+// Ini adalah single-line comment
+
+2. Multiple-line comment, contoh:
+/*
+Ini adalah multiple line comment
+*/
+
+3. Javadoc comment, contoh:
+/**
+Ini adalah javadoc comment
+*/
+
+Perbedaan javadoc comment dengan kedua comment yang lainnya adalah javadoc comment dapat digenerate ke dalam dokumentasi program

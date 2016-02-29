@@ -1,75 +1,145 @@
 
 /**
- * JBank Phase 2.
+ * JBank Program
+ * Customer class
  * 
- * @author (Abdul Chandra Irawan)
- * @NPM (1306405244)
- * @version (27-02-2016)
+ * @author Abdul Chandra Irawan - 1306405244
+ * @version 27.02.2016
  */
+
+//Tambahan
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class Customer
 {
-    private Account accounts = new Account(); //Membuat variabel bertipe Account berdasarkan class Account
-    private String cityName,dateOfBirth,email,firstName,lastName,streetAddress,phoneNumber,zipOrPostalCode; //membuat variabel bertipe string,variable berupa sekumpulan karakter
-    private int custId,numberOfCurrentAccounts; //membuat variabel bertipe integer, yaitu variabel berisi angka dengan batasan -32768 sampai 32767
-
+    /**
+     * Deklarasi variabel
+     * variabel bertipe Account berdasarkan class Account
+     * variabel bertipe string,variable berupa sekumpulan karakter
+     * variabel bertipe integer, yaitu variabel berisi angka dengan batasan -32768 sampai 32767
+     */
+    private Account accounts = new Account();
+    private String cityName,dateOfBirth,email,firstName,lastName,streetAddress,phoneNumber,zipOrPostalCode;
+    private int custId,numberOfCurrentAccounts; 
+    
+    //Tambahan
+    private String emailVali;
+    private String emailRegex = "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$";
+    private Boolean boolVali;
     
     public Customer(){}
     public Customer(String fname, String lname, String dob){}
     public Customer(String firstName, String lastName, String dateOfBirth, int custId){}
     
     /**
-     * @return merupakan fungsi untuk return nilai gabungan dari variabel tersebut secara berurutan
+     * membuat fungsi getAddress untuk mendapatkan informasi alamat
+     * @return nilai pada atribut Address seperti Street Address, City Name,  dan Zip or Postal Code
      */
     public String getAddress(){
-        return streetAddress + " " + cityName+ " " + zipOrPostalCode; //mengembalikan nilai pada atribut Address
+        return streetAddress + " " + cityName+ " " + zipOrPostalCode;
     }
     
-    
-    public Account getAccount(){ //pembuatan fungsi getAccount untuk menerima nama akun
-        return accounts; //mengembalikan nilai pada atribut account
+    /**
+     * Membuat fungsi getAccount untuk menerima nama akun
+     * @return nilai pada atribut account
+     */
+    public Account getAccount(){ 
+        return accounts;
     }
     
-    public int getCustomerId(){//pembuatan fungsi getCustomerId untuk menerima id pelanggan
+    /**
+     * membuat fungsi getCustomerId untuk menerima id pelanggan
+     * @return 0
+     */
+    public int getCustomerId(){
         return 0;
     }
     
-    public String getEmail(){//membuat fungsi getEmail untuk menerima input email
+    /**
+     * membuat fungsi getEmail untuk menerima input email
+     * @return ""
+     */
+    public String getEmail(){
         return "";
     }
     
-    public String getName() {//membuat fungsi setName untuk menerima input nama
+    /**
+     * membuat fungsi setName untuk menerima input nama
+     * @return lastname dan firstname
+     */
+    public String getName() {
         return lastName + "," + firstName;
     }
     
-    public int getNumOfAccounts(){//membuat fungsi getNumAccounts untuk menerima input nomer akun
+    /**
+     * membuat fungsi getNumAccounts untuk menerima input nomer akun
+     * @return 0
+     */
+    public int getNumOfAccounts(){
         return 0;
     }
     
-    public String getPhoneNumber(){//membuat fungsi getPhoneNumber, untuk menerima input nomer telepon
-        return "";
+    /**
+     * membuat fungsi getPhoneNumber, untuk menerima input nomer telepon
+     * @return phoneNumber
+     */
+    public String getPhoneNumber(){
+        return phoneNumber;
     }
     
-    public void setAddress(String street, String city, String code) {//membuat fungsi setaddress dengan variabel street,city dan code
+    /**
+     * membuat fungsi setaddress dengan variabel street,city dan code
+     * @param street, city, dan code
+     * @return 
+     */
+    public void setAddress(String street, String city, String code) {
         streetAddress = street;
         cityName = city;
         zipOrPostalCode = code;
         return;
     }
     
-    public void setEmail(String emailAddress) {//membuat fungsi setEmail, dengan variabel emailAddress
-        return;
+    /**
+     * membuat fungsi setEmail, dengan variabel emailAddress
+     * @return 
+     */
+    public void setEmail(String emailAddress) {
+        emailVali = emailAddress;
+        boolVali = emailVali.matches(emailRegex);
+        
+        if (boolVali == false){
+            System.out.println("false");
+        }
+        else if(boolVali == true){
+            System.out.println("true");
+            email = emailAddress;
+        }
     }
     
-    public void setName(String lname, String fname) {//membuat fungsi setCustomerName, dengan variabel lname dan cfname 
+    /**
+     * membuat fungsi setName, dengan variabel lname dan fname untuk mengganti nama costumer 
+     * @param fname dan lname
+     */
+    public void setName(String lname, String fname) {
         firstName = fname;
         lastName = lname;
     }
     
-    public void setPhoneNumber(String phoneNum) {//membuat fungsi sePhoneNumber 
+    /**
+     * membuat fungsi sePhoneNumber 
+     * @return phoneNum
+     */
+    public void setPhoneNumber(String phoneNum) {
+        phoneNumber = phoneNum;
         return;
     }
     
-    public void setAccount(Account account) {//membuat fungsi 
-        accounts = new Account;
+    /**
+     * membuat fungsi setAccount untuk membuat account baru
+     * @param new Account()
+     */
+    public void setAccount(Account account) { 
+        accounts = new Account();
     }
 }

@@ -1,57 +1,129 @@
 
 /**
- * JBank Phase 1.
+ * JBank Program
+ * Bank class
  * 
- * @author (Abdul Chandra Irawan)
- * @NPM (1306405244)
- * @version (20-02-2016)
+ * @author Abdul Chandra Irawan - 1306405244
+ * @version 27.02.2016
  */
 public class Bank
 {
-    //deklarasi variabel 
+    /**
+     * deklarasi variabel 
+     */
     private static double creditInterestRate, investmentInterestRate,premiumInterestRate;
-    private static int lastCustID, nextCustID;
+    private static int lastCustID = 1000, nextCustID = 1000;
     public static int maxNumOfCustomers = 20;
     private static String closeTime, phone, startTime;
-    public static String website, bankName= "JBANK", bankAddress = "1234 JavaStreet, AnyCity, ThisState, 34567";
+    public static String website, bankName= "JBANK"; 
+    public String bankAddress = "1234 JavaStreet, AnyCity, ThisState, 34567";
     
-    public static String getAddress() {//membuat fungsi getAddress  
+    //Tambahan
+    private static int numOfCurrentCustomer, nextId;
+    
+    /**
+     * membuat fungsi getAddress 
+     */
+    public static String getAddress() {
         return "";
     }
-    public static double getCreditRate() {//membuat fungsi getCreditRate
+    
+    /**
+     * membuat fungsi getCreditRate
+     */
+    public static double getCreditRate() {
         return 0;
     }
-    public static double getInvestmentRate() {//membuat fungsi getInvestmentRate
+    
+    /**
+     * membuat fungsi getInvestmentRate
+     */
+    public static double getInvestmentRate() {
         return 0;
     }
-    public static String getHoursOfOperation() {//membuat fungsi getHoursOfOperation
+
+    /**
+     * membuat fungsi getHoursOfOperation
+     */
+    public static String getHoursOfOperation() {
         return "";
     }
-    public static int getLastID() {//membuat fungsi getLastID
+    
+    /**
+     * membuat fungsi getLastID
+     */
+    public static int getLastID() {
         return 0;
     }
-    public static int getMaxCustomers() {//membuat fungsi getMaxCustomers
+    
+    /**
+     * membuat fungsi getMaxCustomers
+     */
+    public static int getMaxCustomers() {
         return 0;
     }
-    public static String getName() {//membuat fungsi getName
+    
+    /**
+     * membuat fungsi getName
+     */
+    public static String getName() {
         return "";
     }
-    public static int getNextID() {//membuat fungsi getNextID
+    
+    /**
+     * membuat fungsi getNextID
+     */
+    public static int getNextID() {
         return 0;
     }
-    public static String getWebsite() {//membuat fungsi getWebsite
+    
+    /**
+     * membuat fungsi getWebsite
+     */
+    public static String getWebsite() {
         return "";
     }
-    public static double getPremiumRate() {//membuat fungsi getPremiumRate
+    
+    /**
+     * membuat fungsi getPremiumRate
+     */
+    public static double getPremiumRate() {
         return 0;
     }
-    public static String getPhone() {//membuat fungsi getPhone
+    
+    /**
+     * membuat fungsi getPhone
+     */
+    public static String getPhone() {
         return "";
     }
-    public static void setCreditRate(double rate) {//membuat fungsi setCreditRate
+    
+    /**
+     * membuat fungsi setCreditRate
+     */
+    public static void setCreditRate(double rate) {
     }
-    public static void setInvestmentRate(double rate) {//membuat fungsi setInvestmentRate
+    
+    /**
+     * membuat fungsi setInvestmentRate
+     */
+    public static void setInvestmentRate(double rate) {
     }
-    public static void setPremium(double rate) {//membuat fungsi setPremium
+    
+    /**
+     * membuat fungsi setPremium
+     */
+    public static void setPremium(double rate) {
+    }
+    
+    //Tambahan
+    public static int getnumOfCurrentCustomer(){
+        return numOfCurrentCustomer;
+    }
+    
+    public int getNextId(){
+        nextCustID = lastCustID + 1;
+        lastCustID = lastCustID + 1;
+        return nextCustID;
     }
 }

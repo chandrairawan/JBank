@@ -1,35 +1,40 @@
 
 /**
- * JBank Phase 1.
+ * JBank Program
+ * Teller class
  * 
- * @author (Abdul Chandra Irawan)
- * @NPM (1306405244)
- * @version 1.0(20-02-2016)
- * @version 1.1(24-02-2016)
+ * @author Abdul Chandra Irawan - 1306405244
+ * @version 27.02.2016
  */
 public class Teller
 {
-    private Customer c1 = new Customer(); //perintah untuk membuat object Customer dan menyimpannya dalam variabel c1
-    private Account a1 = new Account (); //objek Account
-    private String fullname; //nama lengkap pelanggan yang mendaftar di teller
-    private Account acc; //objek Account
-    private double balance; //jumlah saldo
+    /**
+     * Deklarasi variabel class :
+     */
+    private Customer c1 = new Customer(); //Objek Customer dan menyimpannya dalam variabel c1
+    private Account a1 = new Account (); //Objek Account
+    private String fullname; //objek nama costumer
+    private Account acct; //objek Account
+    private double Balance; //objek balance
     
     public static void main(String[] args){
     }
     
-    public Teller(){//Membuat fungsi teller
+    /**
+     * Membuat fungsi teller
+     */
+    public Teller(){
          c1.setName("Sutandi", "Sanadhi");
          fullname = c1.getName();
          
          System.out.println(fullname);
          
-         a1.setBalance(20000);
+         a1.setBalance(45000);
          c1.setAccount(a1);
          
-         acc = c1.getAccount();
-         balance = acc.getBalance();
+         acct = c1.getAccount();
+         Balance = a1.getBalance();
          
-         System.out.println(balance);
+         System.out.println(Balance);
     }
 }
