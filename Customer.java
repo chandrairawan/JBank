@@ -4,7 +4,7 @@
  * Customer class
  * 
  * @author Abdul Chandra Irawan - 1306405244
- * @version 27.02.2016
+ * @version 05.03.2016
  */
 
 //Tambahan
@@ -20,17 +20,39 @@ public class Customer
      * variabel bertipe integer, yaitu variabel berisi angka dengan batasan -32768 sampai 32767
      */
     private Account accounts = new Account();
-    private String cityName,dateOfBirth,email,firstName,lastName,streetAddress,phoneNumber,zipOrPostalCode;
-    private int custId,numberOfCurrentAccounts; 
+    private String cityName;
+    private String dateOfBirth;
+    private String email;
+    private String firstName;
+    private String lastName;
+    private String streetAddress;
+    private String phoneNumber;
+    private String zipOrPostalCode;
+    private int custId;
+    private int numberOfCurrentAccounts; 
     
     //Tambahan
     private String emailVali;
     private String emailRegex = "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$";
     private Boolean boolVali;
     
-    public Customer(){}
-    public Customer(String fname, String lname, String dob){}
-    public Customer(String firstName, String lastName, String dateOfBirth, int custId){}
+    public Customer(){
+        
+    }
+    
+    public Customer(String fname, String lname){
+       this(fname,lname,"none");
+    }
+   
+    public Customer(String fname, String lname, String dob){
+        firstName = fname;
+        this.lastName = lname;
+        this.dateOfBirth = dob;
+        this.custId = Bank.getNextID();
+    }
+    public Customer(String firstName, String lastName, String dateOfBirth, int custId){
+        
+    }
     
     /**
      * membuat fungsi getAddress untuk mendapatkan informasi alamat
@@ -52,8 +74,8 @@ public class Customer
      * membuat fungsi getCustomerId untuk menerima id pelanggan
      * @return 0
      */
-    public int getCustomerId(){
-        return 0;
+    public int getCustId(){
+        return custId;
     }
     
     /**
@@ -61,7 +83,7 @@ public class Customer
      * @return ""
      */
     public String getEmail(){
-        return "";
+        return email;
     }
     
     /**
@@ -77,7 +99,7 @@ public class Customer
      * @return 0
      */
     public int getNumOfAccounts(){
-        return 0;
+        return numberOfCurrentAccounts;
     }
     
     /**
@@ -97,7 +119,6 @@ public class Customer
         streetAddress = street;
         cityName = city;
         zipOrPostalCode = code;
-        return;
     }
     
     /**
@@ -132,7 +153,6 @@ public class Customer
      */
     public void setPhoneNumber(String phoneNum) {
         phoneNumber = phoneNum;
-        return;
     }
     
     /**
@@ -141,5 +161,17 @@ public class Customer
      */
     public void setAccount(Account account) { 
         accounts = new Account();
+    }
+    
+    public void setCustId(int id){
+        custId=id;
+    }
+    
+    public boolean removeAccount(char type){
+        return false;
+    }
+    
+    public String toString(){
+        return null;
     }
 }

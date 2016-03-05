@@ -4,110 +4,142 @@
  * Bank class
  * 
  * @author Abdul Chandra Irawan - 1306405244
- * @version 27.02.2016
+ * @version 05.03.2016
  */
 public class Bank
 {
     /**
      * deklarasi variabel 
      */
-    private static double creditInterestRate, investmentInterestRate,premiumInterestRate;
-    private static int lastCustID = 1000, nextCustID = 1000;
+    private static double creditInterestRate;
+    private static double investmentInterestRate;
+    private static double premiumInterestRate;
+    private static int nextId; 
+    private static int lastCustID; 
+    private static int nextCustID;
     public static int maxNumOfCustomers = 20;
-    private static String closeTime, phone, startTime;
-    public static String website, bankName= "JBANK"; 
+    private static String closeTime;
+    private static String phone;
+    private static String startTime;
+    public static String website;
+    public static int numOfCurrentCustomers;
+    public static String bankName= "JBANK"; 
     public String bankAddress = "1234 JavaStreet, AnyCity, ThisState, 34567";
-    
-    //Tambahan
-    private static int numOfCurrentCustomer, nextId;
-    
+  
+    private Bank(){
+        
+    }
+   
     /**
      * membuat fungsi getAddress 
-     */
+     *//*
     public static String getAddress() {
-        return "";
-    }
+        return bankAddress;
+    }*/
     
     /**
      * membuat fungsi getCreditRate
      */
     public static double getCreditRate() {
-        return 0;
+        return creditInterestRate;
     }
     
     /**
      * membuat fungsi getInvestmentRate
      */
     public static double getInvestmentRate() {
-        return 0;
+        return investmentInterestRate;
     }
 
     /**
      * membuat fungsi getHoursOfOperation
      */
     public static String getHoursOfOperation() {
-        return "";
+        return closeTime;
     }
     
     /**
      * membuat fungsi getLastID
      */
     public static int getLastID() {
-        return 0;
+        return lastCustID;
     }
     
     /**
      * membuat fungsi getMaxCustomers
      */
     public static int getMaxCustomers() {
-        return 0;
+        return maxNumOfCustomers;
     }
     
     /**
      * membuat fungsi getName
      */
     public static String getName() {
-        return "";
+        return bankName;
     }
     
     /**
      * membuat fungsi getNextID
      */
     public static int getNextID() {
-        return 0;
+        int nextID=0;
+        if(numOfCurrentCustomers>=maxNumOfCustomers)
+        {
+           
+        }
+        else
+        {
+            numOfCurrentCustomers ++;
+            if(nextCustID==0)
+            {   
+                nextCustID=1000;
+                nextID=nextCustID;
+            }
+            else
+            {
+                lastCustID=nextCustID;
+                nextCustID++;
+                nextID=nextCustID;
+            }
+            
+        }
+        return nextID;
     }
     
     /**
      * membuat fungsi getWebsite
      */
     public static String getWebsite() {
-        return "";
+        return website;
     }
     
     /**
      * membuat fungsi getPremiumRate
      */
     public static double getPremiumRate() {
-        return 0;
+        return premiumInterestRate;
     }
     
     /**
      * membuat fungsi getPhone
      */
     public static String getPhone() {
-        return "";
+        return phone;
     }
     
     /**
      * membuat fungsi setCreditRate
      */
     public static void setCreditRate(double rate) {
+        
     }
     
     /**
      * membuat fungsi setInvestmentRate
      */
     public static void setInvestmentRate(double rate) {
+        
     }
     
     /**
@@ -116,14 +148,19 @@ public class Bank
     public static void setPremium(double rate) {
     }
     
+     /**
+    public static int getMaxNumOfCustomers()
+    {
+        return maxNumOfCustomers;
+    }
+    */
+   
     //Tambahan
-    public static int getnumOfCurrentCustomer(){
-        return numOfCurrentCustomer;
+    public static int getnumOfCurrentCustomers(){
+        return numOfCurrentCustomers;
     }
-    
+    /*
     public int getNextId(){
-        nextCustID = lastCustID + 1;
-        lastCustID = lastCustID + 1;
-        return nextCustID;
-    }
+        
+    }*/
 }

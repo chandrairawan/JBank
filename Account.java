@@ -4,7 +4,7 @@
  * Account class
  * 
  * @author Abdul Chandra Irawan - 1306405244 
- * @version 27.02.2016
+ * @version 05.03.2016
  */
 public class Account
 {
@@ -20,29 +20,32 @@ public class Account
      * membuat fungsi Account
      */
     public Account() {
-        
+        acctType = 'S';
+        balance = 10.00;
     }
     
     /**
      * membuat fungsi Account
      */
     public Account(char type, double amount) {
-        
+        acctType = type;
+        balance = amount;
     }
     
     /**
      * membuat fungsi deposit
      * @param amount tidak boleh negatif
+     * @return true, false
      */
-    public void deposit(double amount) {
-        if (amount > 0)
+    public boolean deposit(double amount) {
+        if (amount >= 0)
         {
-            balance = balance + amount;
-            System.out.println("True");
+            balance += amount;
+            return true;
         }
         else
         {
-            System.out.println("False");
+            return false;
         }
     }
     
@@ -88,27 +91,28 @@ public class Account
     
     /**
      * membuat fungsi setAccType
-     * @param code dari acctType ke objek atribut acctType
+     * @param type dari acctType ke objek atribut acctType
      */
-    public void setAcctType(char code) {
-        acctType = code;
+    public void setAcctType(char type) {
+        acctType = type;
     }
     
     /**
      * membuat fungsi withdraw
      * @param amount, jumlah penarikan tidak boleh membuat balance menjadi negatif
+     * @return true, false
      */
-    public void withdraw(double amount) {
+    public boolean withdraw(double amount) {
         predictBalance = balance - amount;
         
         if (predictBalance < 0)
         {
-            System.out.println("false");
+            return false;
         }
         else
         {
             balance = balance - amount;
-            System.out.println("true");
+            return true;
         }
     }
 }

@@ -1,7 +1,6 @@
 #BlueJ class context
 comment0.params=
-comment0.target=java.lang.String\ getAddress()
-comment0.text=\r\n\ membuat\ fungsi\ getAddress\ \r\n
+comment0.target=Bank()
 comment1.params=
 comment1.target=double\ getCreditRate()
 comment1.text=\r\n\ membuat\ fungsi\ getCreditRate\r\n
@@ -18,9 +17,8 @@ comment13.params=rate
 comment13.target=void\ setPremium(double)
 comment13.text=\r\n\ membuat\ fungsi\ setPremium\r\n
 comment14.params=
-comment14.target=int\ getnumOfCurrentCustomer()
-comment15.params=
-comment15.target=int\ getNextId()
+comment14.target=int\ getnumOfCurrentCustomers()
+comment14.text=\r\n\ \ \ \ public\ static\ int\ getMaxNumOfCustomers()\r\n\ \ \ \ {\r\n\ \ \ \ \ \ \ \ return\ maxNumOfCustomers;\r\n\ \ \ \ }\r\n
 comment2.params=
 comment2.target=double\ getInvestmentRate()
 comment2.text=\r\n\ membuat\ fungsi\ getInvestmentRate\r\n
@@ -45,4 +43,4 @@ comment8.text=\r\n\ membuat\ fungsi\ getWebsite\r\n
 comment9.params=
 comment9.target=double\ getPremiumRate()
 comment9.text=\r\n\ membuat\ fungsi\ getPremiumRate\r\n
-numComments=16
+numComments=15
