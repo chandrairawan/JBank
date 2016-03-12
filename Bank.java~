@@ -1,11 +1,15 @@
+import java.util.*;
+import java.text.SimpleDateFormat;
 
 /**
  * JBank Program
  * Bank class
  * 
  * @author Abdul Chandra Irawan - 1306405244
- * @version 27.02.2016
+ * @version 10.03.2016
  */
+
+
 public class Bank
 {
     /**
@@ -18,9 +22,9 @@ public class Bank
     private static int lastCustID; 
     private static int nextCustID;
     public static int maxNumOfCustomers = 20;
-    private static String closeTime;
+    private static Date closeTime;
     private static String phone;
-    private static String startTime;
+    private static Date startTime;
     public static String website;
     public static int numOfCurrentCustomers;
     public static String bankName= "JBANK"; 
@@ -30,7 +34,7 @@ public class Bank
         
     }
    
-    /**
+    /*
      * membuat fungsi getAddress 
      *//*
     public static String getAddress() {
@@ -53,13 +57,17 @@ public class Bank
 
     /**
      * membuat fungsi getHoursOfOperation
+     * @param simpleDateFormat
+     * @return startTime TO closeTime
      */
     public static String getHoursOfOperation() {
-        return closeTime;
+        SimpleDateFormat ft = new SimpleDateFormat("hh:mm a");
+        return ft.format(startTime) +" TO "+ ft.format(closeTime);
     }
     
     /**
      * membuat fungsi getLastID
+     * @return lastCustID
      */
     public static int getLastID() {
         return lastCustID;
@@ -67,6 +75,7 @@ public class Bank
     
     /**
      * membuat fungsi getMaxCustomers
+     * @return maxNumOfCustomers
      */
     public static int getMaxCustomers() {
         return maxNumOfCustomers;
@@ -74,6 +83,7 @@ public class Bank
     
     /**
      * membuat fungsi getName
+     * @return bankName
      */
     public static String getName() {
         return bankName;
@@ -81,6 +91,8 @@ public class Bank
     
     /**
      * membuat fungsi getNextID
+     * @param numOfCurrentCustomers, maxNumOfCustomers
+     * @return nextID
      */
     public static int getNextID() {
         int nextID=0;
@@ -109,6 +121,7 @@ public class Bank
     
     /**
      * membuat fungsi getWebsite
+     * @return website
      */
     public static String getWebsite() {
         return website;
@@ -116,6 +129,7 @@ public class Bank
     
     /**
      * membuat fungsi getPremiumRate
+     * @return premiumInterestRate
      */
     public static double getPremiumRate() {
         return premiumInterestRate;
@@ -123,6 +137,7 @@ public class Bank
     
     /**
      * membuat fungsi getPhone
+     * @return phone
      */
     public static String getPhone() {
         return phone;
@@ -148,7 +163,7 @@ public class Bank
     public static void setPremium(double rate) {
     }
     
-     /**
+     /*
     public static int getMaxNumOfCustomers()
     {
         return maxNumOfCustomers;
@@ -156,11 +171,43 @@ public class Bank
     */
    
     //Tambahan
-    public static int getnumOfCurrentCustomers(){
+    /**
+     * method getter untuk NumOfCurrentCustomers
+     * @return numOfCurrentCustomers
+     */
+    public static int getNumOfCurrentCustomers(){
         return numOfCurrentCustomers;
     }
-    /*
-    public int getNextId(){
-        
-    }*/
+    
+    /**
+     * Method getter untuk closeTime
+     * @return closeTime
+     */
+    public static Date getCloseTime(){
+       return closeTime;
+    }
+    
+    /**
+     * Method getter untuk startTime
+     * @return startTime
+     */
+    public static Date getStartTime(){
+       return startTime;
+    }
+   
+    /**
+     * Method setter untuk closeTime
+     * @param closeTime
+     */
+    public static void setCloseTime(int hour, int min) {
+        closeTime = new GregorianCalendar(0,0,0,hour, min).getTime();
+    }
+    
+    /**
+     * Method setter untuk startTime
+     * @param startTime
+     */
+    public static void setStartTime(int hour, int min) {
+        startTime = new GregorianCalendar(0,0,0,hour, min).getTime();
+    }
 }
