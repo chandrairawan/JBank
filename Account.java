@@ -4,7 +4,7 @@
  * Account class
  * 
  * @author Abdul Chandra Irawan - 1306405244 
- * @version 11.03.2016
+ * @version 18.03.2016
  */
 public class Account
 {
@@ -18,18 +18,19 @@ public class Account
     
     /**
      * membuat fungsi Account
-     */
+     *//*
     public Account() {
         acctType = 'S';
         balance = 10.00;
-    }
+    }*/
     
     /**
      * membuat fungsi Account
      */
-    public Account(char type, double amount) {
+    public Account(Customer cust, char type, double amount) {
         acctType = type;
         balance = amount;
+        id = cust.getCustId()+ "" + type;
     }
     
     /**
@@ -84,10 +85,10 @@ public class Account
     /**
      * membuat fungsi setID
      * @param acctId untuk atribut objek ID
-     */
+     *//*
     public void setID(String acctId) {
         id = acctId;
-    }
+    }*/
     
     /**
      * membuat fungsi setAccType
@@ -114,5 +115,12 @@ public class Account
             balance = balance - amount;
             return true;
         }
+    }
+    
+    public String toString() {
+        System.out.println("Account Type  :   " + acctType);
+        System.out.println("ID            :   " + id);
+        System.out.println("Balance       :   " + balance);
+        return "";
     }
 }

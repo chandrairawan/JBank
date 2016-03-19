@@ -1,19 +1,20 @@
 
-/**
- * JBank Program
- * Customer class
- * 
- * @author Abdul Chandra Irawan - 1306405244
- * @version 10.03.2016
- */
-
 //Tambahan Modul 3
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 //Modul 4
-import java.util.Date;
+import java.util.*;
+import java.text.*;
 
+
+/**
+ * JBank Program
+ * Customer class
+ * 
+ * @author Abdul Chandra Irawan - 1306405244
+ * @version 18.03.2016
+ */
 
 public class Customer
 {
@@ -23,37 +24,69 @@ public class Customer
      * variabel bertipe string,variable berupa sekumpulan karakter
      * variabel bertipe integer, yaitu variabel berisi angka dengan batasan -32768 sampai 32767
      */
-    private Account accounts = new Account();
+    private Account[] accounts = new Account[4];
+    private Account a;
     private String cityName;
+    private int custId;
     private Date dateOfBirth;
     private String email;
     private String firstName;
     private String lastName;
-    private String streetAddress;
+    private int numberOfCurrentAccounts; 
+    private String stAddress;
     private String phoneNumber;
     private String zipOrPostalCode;
-    private int custId;
-    private int numberOfCurrentAccounts; 
+    private int indexArrayAccount = 0;
     
     //Tambahan
     private String emailVali;
     private String emailRegex = "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$";
     private Boolean boolVali;
     
-    
     /**
      * 
+     */
+    public boolean addAccount (char type, double balance) {
+        boolean accountAdded = false, sameType = false;
+        int index = -1;
+        if ( numberOfCurrentAccounts < 5 ) {
+            for (int i = indexArrayAccount; i < 4; i++) {
+                if (accounts[i] == null && index == -1) {
+                    index = i;
+                } else if (accounts[i] != null ) {
+                    if (accounts[i].getId().endsWith( Character.toString(type) ) ) {
+                        sameType = true;
+                        break;
+                    }
+                }
+            }
+            if (!sameType && index != -1){
+                //accounts[index] = new Account (this, balance, type);
+                accountAdded = true;
+                numberOfCurrentAccounts++;
+                indexArrayAccount++;
+            }
+        }
+        return accountAdded;
+    }
+    
+    
+    /**
+     * Constructor Customer
      */
     public Customer(){
         
     }
     
-    /*
+    /**
+     * Constructor Customer
+     * @param fname, lname
+     */
     public Customer(String fname, String lname){
-       this(fname,lname,"none");
+       this(fname,lname, null);
     }
-    */
-   
+    
+    
     public Customer(String fname, String lname, Date dob){
         firstName = fname;
         this.lastName = lname;
@@ -81,15 +114,21 @@ public class Customer
      * @return nilai pada atribut Address seperti Street Address, City Name,  dan Zip or Postal Code
      */
     public String getAddress(){
-        return streetAddress + " " + cityName+ " " + zipOrPostalCode;
+        return stAddress + " " + cityName+ " " + zipOrPostalCode;
     }
     
     /**
      * Membuat fungsi getAccount untuk menerima nama akun
-     * @return nilai pada atribut account
+     * @return semua account yang dimiiki oleh satu customer
      */
-    public Account getAccount(){ 
-        return accounts;
+    public Account getAccount(char type){ 
+        for (Account a: accounts){
+            if(a.getAcctType()==type){
+                return a;
+            }
+        }
+        return null;
+        //return accounts;
     }
     
     /**
@@ -138,7 +177,7 @@ public class Customer
      * @return 
      */
     public void setAddress(String street, String city, String code) {
-        streetAddress = street;
+        stAddress = street;
         cityName = city;
         zipOrPostalCode = code;
     }
@@ -170,6 +209,14 @@ public class Customer
     }
     
     /**
+     * memasukkan tanggal lahir nasabah
+     * @param dob
+     */
+    public void setDateOfBirth(Date dob) {
+       this.dateOfBirth = dob;
+    }
+    
+    /**
      * membuat fungsi sePhoneNumber 
      * @return phoneNum
      */
@@ -180,10 +227,10 @@ public class Customer
     /**
      * membuat fungsi setAccount untuk membuat account baru
      * @param new Account()
-     */
+     *//*
     public void setAccount(Account account) { 
         accounts = new Account();
-    }
+    }*/
     
     /**
      * Method untuk meng-set Customer ID
@@ -198,13 +245,58 @@ public class Customer
      * @return false
      */
     public boolean removeAccount(char type){
-        return false;
+        boolean accountRemoved = false;
+        for (int i = 0; i<=3; i++) {
+            if ( accounts[i].getAcctType() == type) {
+                accounts[i] = null;
+                indexArrayAccount--;
+                numberOfCurrentAccounts--;
+                accountRemoved = true;
+            }
+            
+            if (accounts[i] == null && accountRemoved) {
+                if ( i != 3) {
+                    a = accounts[i];
+                    accounts[i] = accounts [i+1];
+                    accounts [i+1] = a;
+                }
+            }
+        }
+        return accountRemoved;
+        //return false;
     }
     
     /**
      * @return null
      */
     public String toString(){
-        return null;
+        SimpleDateFormat ft = new SimpleDateFormat ("dd/MM/yyyy");
+        System.out.println("Customer ID   :   " + custId);
+        System.out.println("First Name    :   " + firstName);
+        System.out.println("Last Name     :   " + lastName);
+        System.out.println("City Address  :   " + cityName);
+        System.out.println("Stret Address :   " + stAddress);
+        System.out.println("Email         :   " + email);
+        System.out.println("Phone Number  :   " + phoneNumber);
+        System.out.println("Zip / Postal  :   " + zipOrPostalCode);
+        System.out.println("DOB           :   " + ft.format(dateOfBirth));
+        System.out.println("Account       :");
+        for (Account a : accounts) {
+            if ( a!= null) {
+                switch (a.getAcctType()) {
+                    case 'S': System.out.println("          SAVINGS, " + a.getBalance());
+                              break;
+                    case 'O': System.out.println("          OVERDRAFT, " + a.getBalance());
+                              break;
+                    case 'I': System.out.println("          INVESTMENT, " + a.getBalance());
+                              break;
+                    case 'L': System.out.println("          LINEOFCREDIT, " + a.getBalance());
+                              break;
+                    default : System.out.println("          Belum Membuat");
+                }
+            }
+        }
+        return "";
+        //return null;
     }
 }
