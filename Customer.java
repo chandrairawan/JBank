@@ -7,6 +7,7 @@ import java.util.regex.Pattern;
 import java.util.*;
 import java.text.*;
 
+import java.io.*;
 
 /**
  * JBank Program
@@ -37,6 +38,8 @@ public class Customer
     private String phoneNumber;
     private String zipOrPostalCode;
     private int indexArrayAccount = 0;
+    private Date date;
+    private Boolean check;
     
     //Tambahan
     private String emailVali;
@@ -46,7 +49,8 @@ public class Customer
     /**
      * 
      */
-    public boolean addAccount (char type, double balance) {
+    public boolean addAccount (char type, double balance) 
+    {
         boolean accountAdded = false, sameType = false;
         int index = -1;
         if ( numberOfCurrentAccounts < 5 ) {
@@ -61,7 +65,7 @@ public class Customer
                 }
             }
             if (!sameType && index != -1){
-                //accounts[index] = new Account (this, balance, type);
+                accounts[index] = new Account (this, type, balance);
                 accountAdded = true;
                 numberOfCurrentAccounts++;
                 indexArrayAccount++;
@@ -74,7 +78,8 @@ public class Customer
     /**
      * Constructor Customer
      */
-    public Customer(){
+    public Customer()
+    {
         
     }
     
@@ -82,30 +87,35 @@ public class Customer
      * Constructor Customer
      * @param fname, lname
      */
-    public Customer(String fname, String lname){
+    public Customer(String fname, String lname)
+    {
        this(fname,lname, null);
     }
     
     
-    public Customer(String fname, String lname, Date dob){
+    public Customer(String fname, String lname, Date DOB)
+    {
         this.firstName = fname;
         this.lastName = lname;
-        this.dateOfBirth = dob;
+        this.dateOfBirth = dateOfBirth;
         custId = Bank.getNextID();
     }
     
     /**
      * Method Customer
-     */
-    public Customer(String firstName, String lastName, Date dateOfBirth, int custId){
+     *//*
+    public Customer(String firstName, String lastName, Date dateOfBirth, int custId)
+    {
         
-    }
+    }*/
     
     /**
      * Construct DOB
      * @return dateOfBirth
      */
-    public Date getDateOfBirth(){ 
+    public Date getDateOfBirth()
+    { 
+        String dateToStr = DateFormat.getInstance().format(date);
         return dateOfBirth;
     }
     
@@ -113,7 +123,8 @@ public class Customer
      * membuat fungsi getAddress untuk mendapatkan informasi alamat
      * @return nilai pada atribut Address seperti Street Address, City Name,  dan Zip or Postal Code
      */
-    public String getAddress(){
+    public String getAddress()
+    {
         return stAddress + " " + cityName+ " " + zipOrPostalCode;
     }
     
@@ -121,7 +132,8 @@ public class Customer
      * Membuat fungsi getAccount untuk menerima nama akun
      * @return semua account yang dimiiki oleh satu customer
      */
-    public Account getAccount(char type){ 
+    public Account getAccount(char type)
+    { 
         for (Account a: accounts){
             if(a.getAcctType()==type){
                 return a;
@@ -135,7 +147,8 @@ public class Customer
      * membuat fungsi getCustomerId untuk menerima id pelanggan
      * @return custId
      */
-    public int getCustId(){
+    public int getCustId()
+    {
         return custId;
     }
     
@@ -143,7 +156,8 @@ public class Customer
      * membuat fungsi getEmail untuk menerima input email
      * @return email
      */
-    public String getEmail(){
+    public String getEmail()
+    {
         return email;
     }
     
@@ -151,15 +165,17 @@ public class Customer
      * membuat fungsi setName untuk menerima input nama
      * @return lastname dan firstname
      */
-    public String getName() {
-        return lastName + "," + firstName;
+    public String getName() 
+    {
+        return lastName + "," + firstName +","+dateOfBirth;
     }
     
     /**
      * membuat fungsi getNumAccounts untuk menerima input nomer akun
      * @return 0
      */
-    public int getNumOfAccounts(){
+    public int getNumOfAccounts()
+    {
         return numberOfCurrentAccounts;
     }
     
@@ -167,7 +183,8 @@ public class Customer
      * membuat fungsi getPhoneNumber, untuk menerima input nomer telepon
      * @return phoneNumber
      */
-    public String getPhoneNumber(){
+    public String getPhoneNumber()
+    {
         return phoneNumber;
     }
     
@@ -176,17 +193,19 @@ public class Customer
      * @param street, city, dan code
      * @return 
      */
-    public void setAddress(String street, String city, String code) {
-        stAddress = street;
-        cityName = city;
-        zipOrPostalCode = code;
+    public void setAddress(String street, String city, String code) 
+    {
+        this.stAddress = street;
+        this.cityName = city;
+        this.zipOrPostalCode = code;
     }
     
     /**
      * membuat fungsi setEmail, dengan variabel emailAddress
      * @return 
      */
-    public void setEmail(String emailAddress) {
+    public void setEmail(String emailAddress) 
+    {
         emailVali = emailAddress;
         boolVali = emailVali.matches(emailRegex);
         
@@ -195,7 +214,7 @@ public class Customer
         }
         else if(boolVali == true){
             System.out.println("True");
-            email = emailAddress;
+            this.email = emailAddress;
         }
     }
     
@@ -203,25 +222,30 @@ public class Customer
      * membuat fungsi setName, dengan variabel lname dan fname untuk mengganti nama costumer 
      * @param fname dan lname
      */
-    public void setName(String lname, String fname) {
-        firstName = fname;
-        lastName = lname;
+    public void setName(String lname, String fname) 
+    {
+        this.firstName = fname;
+        this.lastName = lname;
     }
     
     /**
      * memasukkan tanggal lahir nasabah
      * @param dob
      */
-    public void setDateOfBirth(Date dob) {
-       this.dateOfBirth = dob;
+    public void setDateOfBirth(Date dateOfBirth)
+    {
+        this.dateOfBirth = dateOfBirth;
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        Date date = new Date();
     }
     
     /**
      * membuat fungsi sePhoneNumber 
      * @return phoneNum
      */
-    public void setPhoneNumber(String phoneNum) {
-        phoneNumber = phoneNum;
+    public void setPhoneNumber(String phoneNum) 
+    {
+        this.phoneNumber = phoneNum;
     }
     
     /**
@@ -236,7 +260,8 @@ public class Customer
      * Method untuk meng-set Customer ID
      * 
      */
-    public void setCustId(int id){
+    public void setCustId(int id)
+    {
         custId=id;
     }
     
@@ -244,7 +269,8 @@ public class Customer
      * Method untuk menghapus sebuah Account
      * @return false
      */
-    public boolean removeAccount(char type){
+    public boolean removeAccount(char type)
+    {
         boolean accountRemoved = false;
         for (int i = 0; i<=3; i++) {
             if ( accounts[i].getAcctType() == type) {
@@ -269,7 +295,8 @@ public class Customer
     /**
      * @return null
      */
-    public String toString(){
+    public String toString()
+    {
         SimpleDateFormat ft = new SimpleDateFormat ("dd/MM/yyyy");
         System.out.println("Customer ID   :   " + custId);
         System.out.println("First Name    :   " + firstName);
@@ -296,6 +323,7 @@ public class Customer
                 }
             }
         }
+        System.out.println("");
         return "";
         //return null;
     }

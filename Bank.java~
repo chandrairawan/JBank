@@ -1,6 +1,6 @@
 import java.util.*;
-import java.text.SimpleDateFormat;
-import java.text.ParseException;
+import java.text.*;
+import java.io.*;
 
 /**
  * JBank Program
@@ -36,10 +36,11 @@ public class Bank
     
     static
     {
-        System.out.println("Input max number customer : ");
         Scanner reader = new Scanner(System.in);
+        System.out.println("Input max number customer : ");
         int x = reader.nextInt();
         MAX_NUM_OF_CUSTOMERS = x;
+        System.out.println ("Maksimum: " +MAX_NUM_OF_CUSTOMERS);
     }
     
     
@@ -262,7 +263,7 @@ public class Bank
     }
     
     public void printAllCustomers() {
-        for (Customer c : Customers) {
+        for (Customer c : customers) {
             if (c!=null)
                 System.out.println(c);
         }

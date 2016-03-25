@@ -4,31 +4,33 @@
  * Account class
  * 
  * @author Abdul Chandra Irawan - 1306405244 
- * @version 18.03.2016
+ * @version 24.03.2016
  */
-public class Account
+public abstract class Account
 {
     /**
      * Deklarasi variabel
      */
-    private char acctType;
-    private double balance;
-    private String id;
+    //private char acctType;
+    protected double balance;
+    protected String id;
     private double predictBalance;
     
     /**
      * membuat fungsi Account
-     *//*
-    public Account() {
-        acctType = 'S';
-        balance = 10.00;
-    }*/
+     */
+    public Account(char type, double amount) 
+    {
+//         acctType = type;
+        balance = amount;
+    }
     
     /**
      * membuat fungsi Account
      */
-    public Account(Customer cust, char type, double amount) {
-        acctType = type;
+    public Account(Customer cust, char type, double amount) 
+    {
+//         acctType = type;
         balance = amount;
         id = cust.getCustId()+ "" + type;
     }
@@ -38,7 +40,8 @@ public class Account
      * @param amount tidak boleh negatif
      * @return true, false
      */
-    public boolean deposit(double amount) {
+    public boolean deposit(double amount) 
+    {
         if (amount >= 0)
         {
             balance += amount;
@@ -50,19 +53,21 @@ public class Account
         }
     }
     
-    /**
-     * membuat fungsi getAccType
-     * @return atribut acctType
-     */
-    public char getAcctType() {
-        return acctType;
-    }
+//     /**
+//      * membuat fungsi getAccType
+//      * @return atribut acctType
+//      */
+//     public char getAcctType() 
+//     {
+//         return acctType;
+//     }
     
     /**
      * membuat fungsi getBalance
      * @return balance
      */
-    public double getBalance() {
+    public double getBalance() 
+    {
         return balance;
     }
     
@@ -70,7 +75,8 @@ public class Account
      * membuat fungsi getId
      * @return id
      */
-    public String getId() {
+    public String getId() 
+    {
         return id; 
     }
     
@@ -78,49 +84,58 @@ public class Account
      * membuat fungsi setBalance
      * @param amount untuk atribut objek balance
      */
-    public void setBalance(double amount) {
-        balance = amount;
+    public void setBalance(double amount) 
+    {
+        this.balance = amount;
     }
     
-    /**
-     * membuat fungsi setID
-     * @param acctId untuk atribut objek ID
-     */
-    public void setID(String acctId) {
-        id = acctId;
-    }
+//     /**
+//      * membuat fungsi setID
+//      * @param acctId untuk atribut objek ID
+//      */
+//     public void setID(String acctId) {
+//         id = acctId;
+//     }
     
-    /**
-     * membuat fungsi setAccType
-     * @param type dari acctType ke objek atribut acctType
-     */
-    public void setAcctType(char type) {
-        acctType = type;
-    }
+//     /**
+//      * membuat fungsi setAccType
+//      * @param type dari acctType ke objek atribut acctType
+//      */
+//     public void setAcctType(char type) 
+//     {
+//         this.acctType = type;
+//     }
     
     /**
      * membuat fungsi withdraw
      * @param amount, jumlah penarikan tidak boleh membuat balance menjadi negatif
      * @return true, false
      */
-    public boolean withdraw(double amount) {
-        predictBalance = balance - amount;
-        
-        if (predictBalance < 0)
-        {
-            return false;
-        }
-        else
-        {
-            balance = balance - amount;
-            return true;
-        }
+    public abstract double withdraw(double amount) 
+    {
+//         predictBalance = balance - amount;
+//         
+//         if (predictBalance < 0)
+//         {
+//             return false;
+//         }
+//         else
+//         {
+//             balance = balance - amount;
+//             return true;
+//         }
+        return ;
     }
     
-    public String toString() {
-        System.out.println("Account Type  :   " + acctType);
-        System.out.println("ID            :   " + id);
-        System.out.println("Balance       :   " + balance);
-        return "";
+    /**
+     * Menampilkan informasi tipe akun, ID, & Balance
+     */
+    public String toString() 
+    {
+//         System.out.println("Account Type  :   " + acctType);
+//         System.out.println("ID            :   " + id);
+//         System.out.println("Balance       :   " + balance);
+//         return "";
+        return id;
     }
 }

@@ -19,10 +19,14 @@ public class Teller
      * Deklarasi variabel class :
      */
     //public Customer c1 = new Customer(); //Objek Customer dan menyimpannya dalam variabel c1
-    //public Account a1 = new Account (); //Objek Account
-    //public String fullname; //objek nama costumer
-    //public Account acct; //objek Account
-    //public double Balance; //objek balance
+    //private Account[] a1 = new Account (4); //Objek Account
+    private String fullname; //objek nama costumer
+    private String firstName;
+    private String lastName;
+    private Date startTime;
+    private Date closeTime;
+    public Account acc; //objek Account
+    public int Balance; //objek balance
     
     private static Date ctime, stime;
     
@@ -34,11 +38,15 @@ public class Teller
     /**
      * Main Method in Teller Class
      */
-    public static void main(String args[]){
+    public static void main(String args[])
+    {
         
         Bank b = new Bank();
         Scanner s = new Scanner(System.in);
         String input = "",fname,lname,phone,addr,city,email,zip;
+        int year = GregorianCalendar.YEAR; 
+        int month = GregorianCalendar.MONTH;
+        int day = GregorianCalendar.DAY_OF_MONTH;
         Customer c = null;
         Date DOB;
         char acctType;
@@ -80,39 +88,31 @@ public class Teller
            
 
            if(loopState) {
-               System.out.print("Masukkan nama depan: ");
-               input = s.nextLine();
-               fname = input;
-               System.out.print("Masukkan nama belakang: ");
-               input = s.nextLine();
-               lname = input;
-               System.out.print("Masukkan nama kota: ");
-               input = s.nextLine();
-               city = input;
-               System.out.print("Masukkan alamat jalan: ");
-               input = s.nextLine();
-               addr = input;
-               System.out.print("Masukkan alamat email: ");
-               input = s.nextLine();
-               email = input;
-               System.out.print("Masukkan nomor telepon: ");
-               input = s.nextLine();
-               phone = input;
-               System.out.print("Masukkan kode pos / zip: ");
-               input = s.nextLine();
-               zip = input;
-               System.out.print("Masukkan tanggal lahir (DD-MM-YY): ");
+               System.out.print("Masukkan nama depan anda: ");
+               fname = s.nextLine();
+               System.out.print("Masukkan nama belakang anda : ");
+               lname = s.nextLine();
+               System.out.println("Masukkan tanggal lahir anda (MM/dd/yyyy): ");
                input = s.nextLine();
                try {
-                   DOB = new SimpleDateFormat("dd-MM-yyyy").parse(input);
-                  
+                    DOB = new SimpleDateFormat("MM/dd/yyyy").parse(input);
                } catch (ParseException e) {
-                System.out.println("Tidak Sesuai");
+                System.out.println("input salah");
                }
-              System.out.println("S: Savings; O: Overdraft; I:Investment; L: Credit Checking; T: Tidak Membuat");
-              System.out.print("Masukkan jenis akun (S/O/I/L/T): ");
-              input = s.nextLine();
-              if (input.equals("T")) {
+               System.out.print("Masukkan alamat email Anda: ");
+               email = s.nextLine();
+               System.out.print("Masukkan Alamat kota anda: ");
+               city = s.nextLine();
+               System.out.print("Masukkan alamat anda : ");
+               addr = s.nextLine();
+               System.out.print("Masukkan kode pos anda : ");
+               zip = s.nextLine();
+               System.out.print("Masukkan nomor telepon anda : ");
+               phone = s.nextLine();
+               System.out.println("S: Savings; O: Overdraft; I:Investment; L: Credit Checking; N: Tidak Membuat");
+               System.out.print("Masukkan jenis akun (S/O/I/L/N): ");
+               input = s.nextLine();
+               if (input.equals("N")) {
                   
               } else {
                   acctType = input.charAt(0);
@@ -133,11 +133,12 @@ public class Teller
               c.setPhoneNumber(phone);
               c.addAccount(acctType, balance);
 
+
            } else {
                break;
             }
            if (c!= null) {
-               System.out.println( b.addCustomer(c)?"Customer ditambahkan": "Customer tidak ditambahkan" );
+               System.out.println( b.addCustomer(c)?"Account Berhasil dibuat": "Account tidak berhasil di tambahkan" );
                customerCreated++;
            }
        }
@@ -255,9 +256,10 @@ public class Teller
     /**
      * Constructor untuk objek Teller
      */
-    public Teller(){
+    public Teller()
+    {
        // Modul 5
-        Bank bank = new Bank();
+        //Bank bank = new Bank();
         Bank.getHoursOfOperation();
         
        /*
@@ -317,5 +319,33 @@ public class Teller
         System.out.println("Balance Saving : " +f4S.doubleValue());
         System.out.println("Balance Investment : " +f4I.doubleValue());
         System.out.println("Balance Credit : " +f4L.doubleValue());*/
+    }
+    
+    public static Date getCloseTime() {
+        return ctime;
+    }
+    
+     public static Date getStartTime() {
+        return stime;
+    }
+    
+      public static void setCloseTime(int year,int month,int day,int hour, int min) {
+        stime = new GregorianCalendar(year, month, day, hour, min).getTime();
+    }
+    
+      public static void setStartTime(int year,int month,int day,int hour, int min) {
+        stime = new GregorianCalendar(year, month, day, hour, min).getTime();
+    }
+    
+    public static void printTime() {
+        System.out.println(Bank.getHoursOfOperation());
+    }
+
+    public Customer createNewCustomer(String fname, String lname, Date DOB) {
+        return new Customer(fname, lname, DOB);
+    }
+    
+    public Customer getCustomer(int customerID) {
+        return new Customer();
     }
 }

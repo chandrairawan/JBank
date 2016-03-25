@@ -18,19 +18,21 @@ public class Account
     
     /**
      * membuat fungsi Account
-     *//*
-    public Account() {
-        acctType = 'S';
-        balance = 10.00;
-    }*/
+     */
+    public Account(char type, double amount) 
+    {
+        acctType = type;
+        balance = amount;
+    }
     
     /**
      * membuat fungsi Account
      */
-    public Account(Customer cust, char type, double amount) {
+    public Account(Customer customer, char type, double amount) 
+    {
         acctType = type;
         balance = amount;
-        id = cust.getCustId()+ "" + type;
+        id = customer.getCustId()+ "" + type;
     }
     
     /**
@@ -38,7 +40,8 @@ public class Account
      * @param amount tidak boleh negatif
      * @return true, false
      */
-    public boolean deposit(double amount) {
+    public boolean deposit(double amount) 
+    {
         if (amount >= 0)
         {
             balance += amount;
@@ -54,7 +57,8 @@ public class Account
      * membuat fungsi getAccType
      * @return atribut acctType
      */
-    public char getAcctType() {
+    public char getAcctType() 
+    {
         return acctType;
     }
     
@@ -62,7 +66,8 @@ public class Account
      * membuat fungsi getBalance
      * @return balance
      */
-    public double getBalance() {
+    public double getBalance() 
+    {
         return balance;
     }
     
@@ -70,7 +75,8 @@ public class Account
      * membuat fungsi getId
      * @return id
      */
-    public String getId() {
+    public String getId() 
+    {
         return id; 
     }
     
@@ -78,8 +84,9 @@ public class Account
      * membuat fungsi setBalance
      * @param amount untuk atribut objek balance
      */
-    public void setBalance(double amount) {
-        balance = amount;
+    public void setBalance(double amount) 
+    {
+        this.balance = amount;
     }
     
     /**
@@ -94,8 +101,9 @@ public class Account
      * membuat fungsi setAccType
      * @param type dari acctType ke objek atribut acctType
      */
-    public void setAcctType(char type) {
-        acctType = type;
+    public void setAcctType(char type) 
+    {
+        this.acctType = type;
     }
     
     /**
@@ -103,7 +111,8 @@ public class Account
      * @param amount, jumlah penarikan tidak boleh membuat balance menjadi negatif
      * @return true, false
      */
-    public boolean withdraw(double amount) {
+    public boolean withdraw(double amount) 
+    {
         predictBalance = balance - amount;
         
         if (predictBalance < 0)
@@ -117,7 +126,11 @@ public class Account
         }
     }
     
-    public String toString() {
+    /**
+     * Menampilkan informasi tipe akun, ID, & Balance
+     */
+    public String toString() 
+    {
         System.out.println("Account Type  :   " + acctType);
         System.out.println("ID            :   " + id);
         System.out.println("Balance       :   " + balance);

@@ -1,6 +1,6 @@
 import java.util.*;
-import java.text.SimpleDateFormat;
-import java.text.ParseException;
+import java.text.*;
+import java.io.*;
 
 /**
  * JBank Program
@@ -17,12 +17,12 @@ public class Bank
      * deklarasi variabel 
      */
     private static double creditInterestRate;
-    private static Date closeTime = null;
+    private static Date closeTime;
     private static double investmentInterestRate;
-    private static int lastCustID;
-    private static int nextCustID;
+    private static int lastCustID = 1000;
+    private static int nextCustID = 1000;
     private static double premiumInterestRate;
-    private static Date startTime = null;
+    private static Date startTime;
     public static String bankAddress = "1234 JavaStreet, AnyCity, ThisState, 34567";
     public static int maxNumOfAcctsPerCustomers = 4;
     private static int MAX_NUM_OF_CUSTOMERS;
@@ -36,20 +36,25 @@ public class Bank
     
     static
     {
-        System.out.println("Input max number customer : ");
         Scanner reader = new Scanner(System.in);
+        System.out.println("Input max number customer : ");
         int x = reader.nextInt();
         MAX_NUM_OF_CUSTOMERS = x;
+        System.out.println ("Max Number of Customer : " +MAX_NUM_OF_CUSTOMERS);
     }
     
     
-    public Bank(){
+    public Bank()
+    {
         
     }
    
-    public static boolean addCustomer (Customer customer){
-        for (int i=0; i < customers.length; i++){
-            if(customers[i] == null){
+    public static boolean addCustomer (Customer customer)
+    {
+        for (int i=0; i < customers.length; i++)
+        {
+            if(customers[i] == null)
+            {
                 customers[i] = customer;
                 return false;
             }
@@ -57,9 +62,12 @@ public class Bank
         return false;
     }
     
-    public static Customer getCustomer(int custID){
-        for (int i=0; i<customers.length; i++){
-            if(customers[i].getCustId() == custID){
+    public static Customer getCustomer(int custID)
+    {
+        for (int i=0; i<customers.length; i++)
+        {
+            if(customers[i].getCustId() == custID)
+            {
                 return customers[i];
             }
         }
@@ -69,7 +77,8 @@ public class Bank
     /*
      * membuat fungsi getAddress 
      */
-    public static String getAddress() {
+    public static String getAddress() 
+    {
         return bankAddress;
     }
        
@@ -77,15 +86,17 @@ public class Bank
     /**
      * membuat fungsi getCreditRate
      */
-    public static double getCreditRate() {
-        return creditInterestRate;
+    public static double getCreditRate() 
+    {
+        return 0;
     }
     
     /**
      * membuat fungsi getInvestmentRate
      */
-    public static double getInvestmentRate() {
-        return investmentInterestRate;
+    public static double getInvestmentRate() 
+    {
+        return 0;
     }
 
     /**
@@ -93,9 +104,11 @@ public class Bank
      * @param simpleDateFormat
      * @return startTime TO closeTime
      */
-    public static String getHoursOfOperation() {
-        SimpleDateFormat ft = new SimpleDateFormat("hh:mm a");
-        return ft.format(startTime) +" TO "+ ft.format(closeTime);
+    public static String getHoursOfOperation() 
+    {
+        return null;
+        //SimpleDateFormat ft = new SimpleDateFormat("hh:mm a");
+        //return ft.format(startTime) +" TO "+ ft.format(closeTime);
         //return new Date(ctime.getTime() - stime.getTime()); 
     }
     
@@ -103,15 +116,17 @@ public class Bank
      * membuat fungsi getLastID
      * @return lastCustID
      */
-    public static int getLastID() {
-        return lastCustID;
+    public static int getLastID() 
+    {
+        return 0;
     }
     ///////////////////
     /**
      * membuat fungsi getMaxCustomers
      * @return maxNumOfCustomers
      */
-    public static int getMaxCustomers() {
+    public static int getMaxCustomers() 
+    {
         //return maxNumOfCustomers;
         return MAX_NUM_OF_CUSTOMERS;
     }
@@ -120,7 +135,8 @@ public class Bank
      * membuat fungsi getName
      * @return bankName
      */
-    public static String getName() {
+    public static String getName() 
+    {
         return bankName;
     }
     
@@ -129,7 +145,8 @@ public class Bank
      * @param numOfCurrentCustomers, maxNumOfCustomers
      * @return nextID
      */
-    public static int getNextID() {
+    public static int getNextID() 
+    {
         int nextID=0;
         if(numOfCurrentCustomers==MAX_NUM_OF_CUSTOMERS)
         {
@@ -161,7 +178,8 @@ public class Bank
      * membuat fungsi getPhone
      * @return phone
      */
-    public static String getPhone() {
+    public static String getPhone() 
+    {
         return phone;
     }
     
@@ -169,22 +187,25 @@ public class Bank
      * membuat fungsi getPremiumRate
      * @return premiumInterestRate
      */
-    public static double getPremiumRate() {
-        return premiumInterestRate;
+    public static double getPremiumRate() 
+    {
+        return 0;
     }
     
     /**
      * membuat fungsi getWebsite
      * @return website
      */
-    public static String getWebsite() {
-        return website;
+    public static String getWebsite() 
+    {
+        return "";
     }
     
     /**
      * membuat fungsi setCreditRate
      */
-    public static void setCreditRate(double rate) {
+    public static void setCreditRate(double rate) 
+    {
         creditInterestRate = rate;
     }
    
@@ -192,31 +213,35 @@ public class Bank
      * Method setter untuk closeTime
      * @param closeTime
      */
-    public static void setCloseTime(int hour, int min) {
-        closeTime = new GregorianCalendar(0,0,0,hour, min).getTime();
+    public static void setCloseTime(int hour, int min) 
+    {
+        //closeTime = new GregorianCalendar(0,0,0,hour, min).getTime();
     }
     
     /**
      * membuat fungsi setInvestmentRate
      */
-    public static void setInvestmentRate(double rate) {
+    public static void setInvestmentRate(double rate) 
+    {
         investmentInterestRate = rate;
     }
     
     /**
      * membuat fungsi setPremium
      */
-    public static void setPremium(double rate) {
+    public static void setPremium(double rate) 
+    {
         premiumInterestRate = rate;
     }
     
     /**
      * Method setter untuk startTime
      * @param startTime
-     */
-    public static void setStartTime(int hour, int min) {
+     *//*
+    public static void setStartTime(int hour, int min) 
+    {
         startTime = new GregorianCalendar(0,0,0,hour, min).getTime();
-    }
+    }*/
   
    
     //Tambahan
@@ -224,7 +249,8 @@ public class Bank
      * method getter untuk NumOfCurrentCustomers
      * @return numOfCurrentCustomers
      */
-    public static int getNumOfCurrentCustomers(){
+    public static int getNumOfCurrentCustomers()
+    {
         return numOfCurrentCustomers;
     }
     
@@ -232,7 +258,8 @@ public class Bank
      * Method getter untuk closeTime
      * @return closeTime
      */
-    public static Date getCloseTime(){
+    public static Date getCloseTime()
+    {
        return closeTime;
     }
     
@@ -240,7 +267,8 @@ public class Bank
      * Method getter untuk startTime
      * @return startTime
      */
-    public static Date getStartTime(){
+    public static Date getStartTime()
+    {
        return startTime;
     }
     
@@ -249,8 +277,10 @@ public class Bank
      * @return True, False
      */
 
-    public boolean setHoursOfOperation(Date startTime, Date closeTime) {
-        if (this.startTime != null || this.closeTime != null) {
+    public boolean setHoursOfOperation(Date startTime, Date closeTime) 
+    {
+        if (this.startTime != null || this.closeTime != null) 
+        {
             startTime = this.startTime;
             closeTime = this.closeTime;
             return true;
@@ -261,8 +291,10 @@ public class Bank
         }
     }
     
-    public void printAllCustomers() {
-        for (Customer c : customers) {
+    public void printAllCustomers() 
+    {
+        for (Customer c : customers) 
+        {
             if (c!=null)
                 System.out.println(c);
         }
