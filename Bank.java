@@ -7,7 +7,7 @@ import java.io.*;
  * Bank class
  * 
  * @author Abdul Chandra Irawan - 1306405244
- * @version 18.03.2016
+ * @version 27.03.2016
  */
 
 
@@ -17,12 +17,12 @@ public class Bank
      * deklarasi variabel 
      */
     private static double creditInterestRate;
-    private static Date closeTime;
+    private static Date closeTime = null;
     private static double investmentInterestRate;
-    private static int lastCustID = 1000;
-    private static int nextCustID = 1000;
+    private static int lastCustID;
+    private static int nextCustID;
     private static double premiumInterestRate;
-    private static Date startTime;
+    private static Date startTime = null;
     public static String bankAddress = "1234 JavaStreet, AnyCity, ThisState, 34567";
     public static int maxNumOfAcctsPerCustomers = 4;
     private static int MAX_NUM_OF_CUSTOMERS;
@@ -88,7 +88,7 @@ public class Bank
      */
     public static double getCreditRate() 
     {
-        return 0;
+        return creditInterestRate;
     }
     
     /**
@@ -96,7 +96,7 @@ public class Bank
      */
     public static double getInvestmentRate() 
     {
-        return 0;
+        return investmentInterestRate;
     }
 
     /**
@@ -106,9 +106,8 @@ public class Bank
      */
     public static String getHoursOfOperation() 
     {
-        return null;
-        //SimpleDateFormat ft = new SimpleDateFormat("hh:mm a");
-        //return ft.format(startTime) +" TO "+ ft.format(closeTime);
+        SimpleDateFormat ft = new SimpleDateFormat("hh:mm a");
+        return ft.format(startTime) +" TO "+ ft.format(closeTime);
         //return new Date(ctime.getTime() - stime.getTime()); 
     }
     
@@ -118,7 +117,7 @@ public class Bank
      */
     public static int getLastID() 
     {
-        return 0;
+        return lastCustID;
     }
     ///////////////////
     /**
@@ -189,7 +188,7 @@ public class Bank
      */
     public static double getPremiumRate() 
     {
-        return 0;
+        return premiumInterestRate;
     }
     
     /**
@@ -198,7 +197,7 @@ public class Bank
      */
     public static String getWebsite() 
     {
-        return "";
+        return website;
     }
     
     /**
@@ -215,7 +214,7 @@ public class Bank
      */
     public static void setCloseTime(int hour, int min) 
     {
-        //closeTime = new GregorianCalendar(0,0,0,hour, min).getTime();
+        closeTime = new GregorianCalendar(0,0,0,hour, min).getTime();
     }
     
     /**
@@ -237,11 +236,11 @@ public class Bank
     /**
      * Method setter untuk startTime
      * @param startTime
-     *//*
+     */
     public static void setStartTime(int hour, int min) 
     {
         startTime = new GregorianCalendar(0,0,0,hour, min).getTime();
-    }*/
+    }
   
    
     //Tambahan

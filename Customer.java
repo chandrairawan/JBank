@@ -14,7 +14,7 @@ import java.io.*;
  * Customer class
  * 
  * @author Abdul Chandra Irawan - 1306405244
- * @version 18.03.2016
+ * @version 27.03.2016
  */
 
 public class Customer
@@ -49,7 +49,7 @@ public class Customer
     /**
      * 
      */
-    public boolean addAccount (char type, double balance) 
+    public boolean addAccount (Account acct) 
     {
         boolean accountAdded = false, sameType = false;
         int index = -1;
@@ -58,20 +58,21 @@ public class Customer
                 if (accounts[i] == null && index == -1) {
                     index = i;
                 } else if (accounts[i] != null ) {
-                    if (accounts[i].getId().endsWith( Character.toString(type) ) ) {
+                    if (accounts[i].getClass().equals( acct.getClass() )){
                         sameType = true;
                         break;
                     }
                 }
             }
             if (!sameType && index != -1){
-                accounts[index] = new Account (this, type, balance);
+                accounts[index] = acct;
                 accountAdded = true;
                 numberOfCurrentAccounts++;
                 indexArrayAccount++;
             }
         }
         return accountAdded;
+        //return false;
     }
     
     
@@ -79,8 +80,7 @@ public class Customer
      * Constructor Customer
      */
     public Customer()
-    {
-        
+    { 
     }
     
     /**
@@ -92,8 +92,7 @@ public class Customer
        this(fname,lname, null);
     }
     
-    
-    public Customer(String fname, String lname, Date DOB)
+    public Customer(String fname, String lname, Date dateOfBirth)
     {
         this.firstName = fname;
         this.lastName = lname;
@@ -101,13 +100,10 @@ public class Customer
         custId = Bank.getNextID();
     }
     
-    /**
-     * Method Customer
-     *//*
-    public Customer(String firstName, String lastName, Date dateOfBirth, int custId)
+    
+    public Customer(String firstName, String lastName, String DOB, int custId)
     {
-        
-    }*/
+    }
     
     /**
      * Construct DOB
@@ -115,7 +111,6 @@ public class Customer
      */
     public Date getDateOfBirth()
     { 
-        String dateToStr = DateFormat.getInstance().format(date);
         return dateOfBirth;
     }
     
@@ -133,14 +128,29 @@ public class Customer
      * @return semua account yang dimiiki oleh satu customer
      */
     public Account getAccount(char type)
-    { 
-        for (Account a: accounts){
-            if(a.getAcctType()==type){
-                return a;
-            }
+    {
+        Account acct = null;
+        for (Account a: accounts ) {
+            switch (type) {
+                case 'S' : if( (a instanceof Savings) && !(a instanceof Investment) ) {
+                    acct = a;
+                }
+                break;
+                case 'L' : if(a instanceof LineOfCredit) {
+                    acct = a;
+                }
+                break;
+                case 'O' : if(a instanceof OverDraftProtect) {
+                    acct = a;
+                }
+                break;
+                case 'I' : if(a instanceof Investment) {
+                    acct = a;
+                }
+                break;
+            }   
         }
-        return null;
-        //return accounts;
+        return acct;
     }
     
     /**
@@ -234,9 +244,7 @@ public class Customer
      */
     public void setDateOfBirth(Date dateOfBirth)
     {
-        this.dateOfBirth = dateOfBirth;
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-        Date date = new Date();
+        dateOfBirth = dateOfBirth;
     }
     
     /**
@@ -271,13 +279,38 @@ public class Customer
      */
     public boolean removeAccount(char type)
     {
+        Account a = null;
         boolean accountRemoved = false;
         for (int i = 0; i<=3; i++) {
-            if ( accounts[i].getAcctType() == type) {
-                accounts[i] = null;
-                indexArrayAccount--;
-                numberOfCurrentAccounts--;
-                accountRemoved = true;
+            switch (type) {
+                case 'S' : if ( accounts[i] instanceof Savings && !(accounts[i] instanceof Investment)) {
+                    accounts[i] = null;
+                    indexArrayAccount--;
+                    numberOfCurrentAccounts--;
+                    accountRemoved = true;
+                }
+                break;
+                case 'L' : if ( accounts[i] instanceof LineOfCredit) {
+                    accounts[i] = null;
+                    indexArrayAccount--;
+                    numberOfCurrentAccounts--;
+                    accountRemoved = true;
+                }
+                break;
+                case 'O' : if ( accounts[i] instanceof OverDraftProtect) {
+                    accounts[i] = null;
+                    indexArrayAccount--;
+                    numberOfCurrentAccounts--;
+                    accountRemoved = true;
+                }
+                break;
+                case 'I' : if ( accounts[i] instanceof Investment) {
+                    accounts[i] = null;
+                    indexArrayAccount--;
+                    numberOfCurrentAccounts--;
+                    accountRemoved = true;
+                }
+                break;
             }
             
             if (accounts[i] == null && accountRemoved) {
@@ -289,7 +322,6 @@ public class Customer
             }
         }
         return accountRemoved;
-        //return false;
     }
     
     /**
@@ -308,6 +340,7 @@ public class Customer
         System.out.println("Zip / Postal  :   " + zipOrPostalCode);
         System.out.println("DOB           :   " + ft.format(dateOfBirth));
         System.out.println("Account       :");
+        /*
         for (Account a : accounts) {
             if ( a!= null) {
                 switch (a.getAcctType()) {
@@ -323,8 +356,14 @@ public class Customer
                 }
             }
         }
-        System.out.println("");
+        System.out.println("");*/
         return "";
-        //return null;
+    }
+    
+    public void printAllAccounts() {
+        for (Account a : accounts) {
+            if (a!=null)
+                System.out.println(a);
+        }
     }
 }

@@ -1,0 +1,16 @@
+#BlueJ class context
+comment0.params=cust\ amount\ creditAmount
+comment0.target=LineOfCredit(Customer,\ double,\ double)
+comment1.params=
+comment1.target=void\ feeAssessment()
+comment2.params=amount
+comment2.target=boolean\ withdraw(double)
+comment3.params=
+comment3.target=double\ getCreditBalance()
+comment4.params=
+comment4.target=double\ getCreditLimit()
+comment5.params=amount
+comment5.target=void\ setCreditBalance(double)
+comment6.params=amount
+comment6.target=void\ setCreditLimit(double)
+numComments=7

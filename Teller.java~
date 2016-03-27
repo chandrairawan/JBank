@@ -10,7 +10,7 @@ import java.lang.Math;
  * Customer class
  * 
  * @author Abdul Chandra Irawan - 1306405244
- * @version 24.03.2016
+ * @version 27.03.2016
  */
 
 public class Teller
@@ -27,144 +27,141 @@ public class Teller
     //public String fullname; //objek nama costumer
     //public Account acct; //objek Account
     //public double Balance; //objek balance
+    /*
+    aprivate static Date ctime, stime;
     
-//     private static Date ctime, stime;
-//     
-//     //Modul 4
-//     private static MathContext mc = new MathContext(8);
-//     private static MathContext mc1 = new MathContext(3);
-//     
-//     
-//     /**
-//      * Main Method in Teller Class
-//      */
-     public static void main(String args[])
+    //Modul 4
+    private static MathContext mc = new MathContext(8);
+    private static MathContext mc1 = new MathContext(3);
+    */
+    
+    /**
+     * Main Method in Teller Class
+     */
+    public static void main(String args[])
     {
-        System.out.println("Customer ID   : 1000 ");
-        System.out.println("First Name    : Chandra  ");
-        System.out.println("Last Name           : Irawan  ");
-        System.out.println("Saldo Saving        : 511.63979463007314");
-        System.out.println("Interest Saving     : 11.63979463007314");
-        System.out.println("Saldo Investment    : 1039.0985282327247");
-        System.out.println("Interest Investment : 39.098528232724675");
+        Customer c1 = new Customer("Chandra", "Irawan", null);
+        Savings s1 = new Savings(c1, 500);
+        Investment i1 = new Investment(c1, 1000, 12);
+        s1.addDailyInterest(280);
+        i1.addDailyInterest(280);
+        
+        /*
+        Account account = new Account();
+        
+        Bank b = new Bank();
+        Scanner s = new Scanner(System.in);
+        String input = "",fname,lname,phone,addr,city,email,zip;
+        Customer c = null;
+        Date DOB;
+        char acctType;
+        boolean loopState,customerAdded;
+        int customerCreated = 0;
+        double balance;
+        Bank.getCreditRate();
+        System.out.println("");
+        
+        for (int i = 0; i <= Bank.getMaxCustomers(); i++) {
+            fname = null;
+            lname = null;
+            phone = null;
+            city = null;
+            DOB = null;
+            acctType = '\0';
+            loopState = false;
+            email = null;
+            zip = null;
+            addr = null;
+            input = "";
+            balance = 0;
+            do {
+                
+                System.out.println("Apakah ingin membuat Customer? (Y/N)");
+                input = s.nextLine();
+                if ( ( input.equals("y") ) || ( input.equals("Y")) ) {
+                    loopState = true;
+                    break;
+                } 
+                else if ( ( input.equals("n") ) || ( input.equals("N") ) ) {
+                    loopState = false;
+                    break;
+                }    
+                else {
+                   System.out.println("Input Terbatas Y Atau N Saja\n");
+               } 
+           } while (!loopState);
+           
 
-        
-        
-       // Account account = new Account();
-//         
-//         Bank b = new Bank();
-//         Scanner s = new Scanner(System.in);
-//         String input = "",fname,lname,phone,addr,city,email,zip;
-//         Customer c = null;
-//         Date DOB;
-//         char acctType;
-//         boolean loopState,customerAdded;
-//         int customerCreated = 0;
-//         double balance;
-//         Bank.getCreditRate();
-//         System.out.println("");
-//         
-//         for (int i = 0; i <= Bank.getMaxCustomers(); i++) {
-//             fname = null;
-//             lname = null;
-//             phone = null;
-//             city = null;
-//             DOB = null;
-//             acctType = '\0';
-//             loopState = false;
-//             email = null;
-//             zip = null;
-//             addr = null;
-//             input = "";
-//             balance = 0;
-//             do {
-//                 
-//                 System.out.println("Apakah ingin membuat Customer? (Y/N)");
-//                 input = s.nextLine();
-//                 if ( ( input.equals("y") ) || ( input.equals("Y")) ) {
-//                     loopState = true;
-//                     break;
-//                 } 
-//                 else if ( ( input.equals("n") ) || ( input.equals("N") ) ) {
-//                     loopState = false;
-//                     break;
-//                 }    
-//                 else {
-//                    System.out.println("Input Terbatas Y Atau N Saja\n");
-//                } 
-//            } while (!loopState);
-//            
-// 
-//            if(loopState) {
-//                System.out.print("Masukkan nama depan: ");
-//                input = s.nextLine();
-//                fname = input;
-//                System.out.print("Masukkan nama belakang: ");
-//                input = s.nextLine();
-//                lname = input;
-//                System.out.print("Masukkan nama kota: ");
-//                input = s.nextLine();
-//                city = input;
-//                System.out.print("Masukkan alamat jalan: ");
-//                input = s.nextLine();
-//                addr = input;
-//                System.out.print("Masukkan alamat email: ");
-//                input = s.nextLine();
-//                email = input;
-//                System.out.print("Masukkan nomor telepon: ");
-//                input = s.nextLine();
-//                phone = input;
-//                System.out.print("Masukkan kode pos / zip: ");
-//                input = s.nextLine();
-//                zip = input;
-//                System.out.print("Masukkan tanggal lahir (DD-MM-YY): ");
-//                input = s.nextLine();
-//                try {
-//                    DOB = new SimpleDateFormat("dd-MM-yyyy").parse(input);
-//                   
-//                } catch (ParseException e) {
-//                 System.out.println("Tidak Sesuai");
-//                }
-//               System.out.println("S: Savings; O: Overdraft; I:Investment; L: Credit Checking; T: Tidak Membuat");
-//               System.out.print("Masukkan jenis akun (S/O/I/L/T): ");
-//               input = s.nextLine();
-//               if (input.equals("T")) {
-//                   
-//               } else {
-//                   acctType = input.charAt(0);
-//                   do {
-//                     System.out.print("Memasukkan nilai saldo awal: ");
-//                     input = s.nextLine();
-//                     balance = Integer.parseInt(input);
-//                     if (balance<=0) {
-//                         System.out.println("Masukkan nilai yang benar!");
-//                     } else {
-//                         break;
-//                     }
-//                   } while(true);
-//               }
-//               c = new Customer(fname, lname, DOB);
-//               c.setAddress(addr, city, zip);
-//               c.setEmail(email);
-//               c.setPhoneNumber(phone);
-//               c.addAccount(acctType, balance);
-// 
-//            } else {
-//                break;
-//             }
-//            if (c!= null) {
-//                System.out.println( b.addCustomer(c)?"Customer ditambahkan": "Customer tidak ditambahkan" );
-//                customerCreated++;
-//            }
-//        }
-//        if (c!= null) {
-//             b.printAllCustomers();
-//             c = Bank.getCustomer(1000);
-//             Account acc = new Account(c, 'C', 1000);
-//             System.out.println("Account Type: " + acc.getAcctType());
-//             System.out.println("Balance     : " + acc.getBalance());
-//             System.out.println("ID          : " + acc.getId());
-//         }
+           if(loopState) {
+               System.out.print("Masukkan nama depan: ");
+               input = s.nextLine();
+               fname = input;
+               System.out.print("Masukkan nama belakang: ");
+               input = s.nextLine();
+               lname = input;
+               System.out.print("Masukkan nama kota: ");
+               input = s.nextLine();
+               city = input;
+               System.out.print("Masukkan alamat jalan: ");
+               input = s.nextLine();
+               addr = input;
+               System.out.print("Masukkan alamat email: ");
+               input = s.nextLine();
+               email = input;
+               System.out.print("Masukkan nomor telepon: ");
+               input = s.nextLine();
+               phone = input;
+               System.out.print("Masukkan kode pos / zip: ");
+               input = s.nextLine();
+               zip = input;
+               System.out.print("Masukkan tanggal lahir (DD-MM-YY): ");
+               input = s.nextLine();
+               try {
+                   DOB = new SimpleDateFormat("dd-MM-yyyy").parse(input);
+                  
+               } catch (ParseException e) {
+                System.out.println("Tidak Sesuai");
+               }
+              System.out.println("S: Savings; O: Overdraft; I:Investment; L: Credit Checking; T: Tidak Membuat");
+              System.out.print("Masukkan jenis akun (S/O/I/L/T): ");
+              input = s.nextLine();
+              if (input.equals("T")) {
+                  
+              } else {
+                  acctType = input.charAt(0);
+                  do {
+                    System.out.print("Memasukkan nilai saldo awal: ");
+                    input = s.nextLine();
+                    balance = Integer.parseInt(input);
+                    if (balance<=0) {
+                        System.out.println("Masukkan nilai yang benar!");
+                    } else {
+                        break;
+                    }
+                  } while(true);
+              }
+              c = new Customer(fname, lname, DOB);
+              c.setAddress(addr, city, zip);
+              c.setEmail(email);
+              c.setPhoneNumber(phone);
+              c.addAccount(acctType, balance);
+
+           } else {
+               break;
+            }
+           if (c!= null) {
+               System.out.println( b.addCustomer(c)?"Customer ditambahkan": "Customer tidak ditambahkan" );
+               customerCreated++;
+           }
+       }
+       if (c!= null) {
+            b.printAllCustomers();
+            c = Bank.getCustomer(1000);
+            Account acc = new Account(c, 'C', 1000);
+            System.out.println("Account Type: " + acc.getAcctType());
+            System.out.println("Balance     : " + acc.getBalance());
+            System.out.println("ID          : " + acc.getId());
+        }*/
         /*
         // Tugas 4 Modul 3
         String user_c;
@@ -273,10 +270,10 @@ public class Teller
      */
     public Teller()
     {
-       // Modul 5
-//         Bank bank = new Bank();
-//         Bank.getHoursOfOperation();
-        
+        /*Modul 5
+        Bank bank = new Bank();
+        Bank.getHoursOfOperation();
+        */
        /*
          c1.setName("Sutandi", "Sanadhi");
          fullname = c1.getName();

@@ -1,39 +1,42 @@
+import java.math.BigDecimal;
+import java.lang.Math;
+import java.math.MathContext;
 
 /**
  * JBank Program
  * Account class
  * 
  * @author Abdul Chandra Irawan - 1306405244 
- * @version 18.03.2016
+ * @version 27.03.2016
  */
-public class Account
+public abstract class Account
 {
     /**
      * Deklarasi variabel
      */
-    private char acctType;
-    private double balance;
-    private String id;
-    private double predictBalance;
+    //private char acctType;
+    protected double balance;
+    protected String id;
+    protected MathContext mc = new MathContext(3);
     
     /**
      * membuat fungsi Account
-     */
+     *//*
     public Account(char type, double amount) 
     {
         acctType = type;
         balance = amount;
-    }
+    }*/
     
     /**
      * membuat fungsi Account
-     */
-    public Account(Customer customer, char type, double amount) 
+     *//*
+    public Account(Customer cust, char type, double amount) 
     {
         acctType = type;
         balance = amount;
-        id = customer.getCustId()+ "" + type;
-    }
+        id = cust.getCustId()+ "" + type;
+    }*/
     
     /**
      * membuat fungsi deposit
@@ -56,11 +59,11 @@ public class Account
     /**
      * membuat fungsi getAccType
      * @return atribut acctType
-     */
+     *//*
     public char getAcctType() 
     {
         return acctType;
-    }
+    }*/
     
     /**
      * membuat fungsi getBalance
@@ -100,19 +103,19 @@ public class Account
     /**
      * membuat fungsi setAccType
      * @param type dari acctType ke objek atribut acctType
-     */
+     *//*
     public void setAcctType(char type) 
     {
         this.acctType = type;
-    }
+    }*/
     
     /**
      * membuat fungsi withdraw
      * @param amount, jumlah penarikan tidak boleh membuat balance menjadi negatif
      * @return true, false
      */
-    public boolean withdraw(double amount) 
-    {
+    public abstract boolean withdraw(double amount); 
+    /*{
         predictBalance = balance - amount;
         
         if (predictBalance < 0)
@@ -124,16 +127,50 @@ public class Account
             balance = balance - amount;
             return true;
         }
-    }
+        return ;
+    }*
     
     /**
      * Menampilkan informasi tipe akun, ID, & Balance
      */
+    @Override
     public String toString() 
     {
-        System.out.println("Account Type  :   " + acctType);
-        System.out.println("ID            :   " + id);
-        System.out.println("Balance       :   " + balance);
+        if ( this instanceof Savings && !(this instanceof Investment)) {
+            System.out.println("SAVING");
+        } else if ( this instanceof LineOfCredit) {
+            LineOfCredit l = (LineOfCredit)this;
+            System.out.println("Line-Of-Credit");
+            System.out.println("    Credit Balance:   "+ l.getCreditBalance());
+            System.out.println("    Monthly Fee   :   "+ l.getMonthlyFee());
+        } else if ( this instanceof OverDraftProtect) {
+            OverDraftProtect o = (OverDraftProtect)this;
+            System.out.println("Overdraft Protection");
+            System.out.println("    Monthly Fee   :   "+ o.getMonthlyFee());
+        } else if ( this instanceof Investment) {
+            System.out.println("Investment");
+        }
+        System.out.println("    Balance       :   " + balance);
         return "";
+    }
+    
+    /**
+     * An example of a method - replace this comment with your own
+     *
+     * @param  y   a sample parameter for a method
+     * @return     the sum of x and y
+     */
+    protected static double futureValue(double balance, double rate, double compound, double period) 
+    {
+        MathContext mc = new MathContext(3);
+        BigDecimal bal = new BigDecimal (balance);
+        BigDecimal r = new BigDecimal (rate);
+        BigDecimal n = new BigDecimal (compound);
+        BigDecimal t = new BigDecimal (period);
+        BigDecimal f1 = r.divide(n, mc.DECIMAL32).add(new BigDecimal(1));
+        BigDecimal f2 = n.multiply(t, mc.DECIMAL32);
+        BigDecimal f3 = new BigDecimal (Math.pow(f1.doubleValue(), f2.doubleValue()),mc.DECIMAL32);
+        BigDecimal f4 = f3.multiply(bal, mc.DECIMAL32);
+        return f4.doubleValue();
     }
 }
