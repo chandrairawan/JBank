@@ -138,7 +138,7 @@ public abstract class Account
     {
         if ( this instanceof Savings && !(this instanceof Investment)) {
             System.out.println("SAVING");
-        }/* else if ( this instanceof LineOfCredit) {
+        } else if ( this instanceof LineOfCredit) {
             LineOfCredit l = (LineOfCredit)this;
             System.out.println("Line-Of-Credit");
             System.out.println("    Credit Balance:   "+ l.getCreditBalance());
@@ -149,7 +149,7 @@ public abstract class Account
             System.out.println("    Monthly Fee   :   "+ o.getMonthlyFee());
         } else if ( this instanceof Investment) {
             System.out.println("Investment");
-        }*/
+        }
         System.out.println("    Balance       :   " + balance);
         return "";
     }

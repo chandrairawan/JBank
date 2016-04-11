@@ -14,7 +14,7 @@ public class Savings extends Account
      */
     public Savings(Customer cust, double amount)
     {
-        super();
+        //super();
         
         id = Integer.toString(cust.getCustId());
         super.balance = amount;

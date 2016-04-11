@@ -1,0 +1,113 @@
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+/**
+ * Write a description of class ATMGUI here.
+ * 
+ * @author Abdul Chandra Irawan 
+ * @version 07.04.2016
+ */
+public class CustGUI
+{
+    // instance variables - replace the example below with your own
+    private int x;
+
+    private Frame mainFrame;
+    private Panel controlPanel;
+    
+    /**
+     * Constructor for objects of class ATMGUI
+     */
+    public CustGUI()
+    {
+        CustomerGUI();
+    }
+
+    public static void main(String args[])
+    { 
+        
+       
+       CustGUI customerGUI = new CustGUI();
+       customerGUI.Demo();
+       
+       
+
+     
+    }
+    
+        public void CustomerGUI()
+    {
+        mainFrame = new Frame("Customer GUI");
+        mainFrame.setSize(500,300);
+        mainFrame.setLayout(new GridLayout(0,1));
+        mainFrame.addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent windowEvent)
+            {
+                System.exit(0);
+            }
+        });
+        
+        controlPanel = new Panel();
+        controlPanel.setLayout(new FlowLayout());
+        
+        mainFrame.add(controlPanel);
+        mainFrame.setVisible(true);
+    }
+    
+    private void Demo()
+    {
+        Button cancelButton = new Button("Cancel");
+        Button saveAndReturn = new Button("Save & Return");
+        
+        final JTextField custID = new JTextField("1004",5);
+        final JTextField lastName = new JTextField("Last Name", 12);
+        final JTextField firstName = new JTextField("First Name", 20);
+        final JTextField address = new JTextField("Address", 25);
+        final JTextField city = new JTextField("City", 20);
+        final JTextField state = new JTextField("State", 3);
+        final JTextField zipCode = new JTextField("Zip Code", 6);
+        final JTextField phone = new JTextField("Phone", 8);
+        final JTextField emailAddress = new JTextField("Email Address", 20);
+        final JTextField dob = new JTextField("DOB", 8);
+        final List accountList = new List(5,false);
+        
+        accountList.add("Checking/OverDraft");
+        accountList.add("Line of Credit");
+        accountList.add("Savings");
+        accountList.add("Investment");
+        accountList.add("Other");
+        
+        
+        cancelButton.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                
+            }
+        });
+        
+        saveAndReturn.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+  
+            }
+        });
+        
+        controlPanel.add(cancelButton);
+        controlPanel.add(saveAndReturn);
+        controlPanel.add(custID);
+        controlPanel.add(lastName);
+        controlPanel.add(firstName);
+        controlPanel.add(address);
+        controlPanel.add(city);
+        controlPanel.add(state);
+        controlPanel.add(zipCode);
+        controlPanel.add(phone);
+        controlPanel.add(emailAddress);
+        controlPanel.add(dob);
+        controlPanel.add(accountList);
+        
+        mainFrame.setVisible(true);
+    }
+}

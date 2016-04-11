@@ -5,7 +5,7 @@
  * @author Abdul Chandra Irawan 
  * @version 27.03.2016
  */
-public class Savings extends Account 
+public class Savings 
 {
     protected double interestEarned;
 
@@ -14,7 +14,7 @@ public class Savings extends Account
      */
     public Savings(Customer cust, double amount)
     {
-        super();
+        //super();
         
         id = Integer.toString(cust.getCustId());
         super.balance = amount;
@@ -47,7 +47,7 @@ public class Savings extends Account
     public void addDailyInterest(int days)
     {
         double A, period;
-        period = (double)numOfDays / 365;
+        period = (double)days / 365;
         A = futureValue(balance, 0.03, 360, period);
         interestEarned = A - balance;
         balance = A;
