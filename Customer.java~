@@ -140,7 +140,7 @@ public class Customer
                     acct = a;
                 }
                 break;
-                case 'O' : if(a instanceof OverDraftProtect) {
+                case 'O' : if(a instanceof OverDraftProtection) {
                     acct = a;
                 }
                 break;
@@ -286,28 +286,28 @@ public class Customer
                 case 'S' : if ( accounts[i] instanceof Savings && !(accounts[i] instanceof Investment)) {
                     accounts[i] = null;
                     indexArrayAccount--;
-                    numOfAccounts--;
+                    numberOfCurrentAccounts--;
                     accountRemoved = true;
                 }
                 break;
                 case 'L' : if ( accounts[i] instanceof LineOfCredit) {
                     accounts[i] = null;
                     indexArrayAccount--;
-                    numOfAccounts--;
+                    numberOfCurrentAccounts--;
                     accountRemoved = true;
                 }
                 break;
                 case 'O' : if ( accounts[i] instanceof OverDraftProtect) {
                     accounts[i] = null;
                     indexArrayAccount--;
-                    numOfAccounts--;
+                    numberOfCurrentAccounts--;
                     accountRemoved = true;
                 }
                 break;
                 case 'I' : if ( accounts[i] instanceof Investment) {
                     accounts[i] = null;
                     indexArrayAccount--;
-                    numOfAccounts--;
+                    numberOfCurrentAccounts--;
                     accountRemoved = true;
                 }
                 break;

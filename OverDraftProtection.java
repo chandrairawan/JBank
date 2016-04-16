@@ -5,11 +5,11 @@
  * @author Abdul Chandra Irawan 
  * @version 27.03.2016
  */
-public class OverDraftProtect extends Checking 
+public class OverDraftProtection extends Checking 
 {
     private Savings savingsAccount;
 
-    public OverDraftProtect(Customer cust, double amount, Savings save) 
+    public OverDraftProtection(Customer cust, double amount, Savings save) 
     {
         super();
         id = Integer.toString(cust.getCustId());

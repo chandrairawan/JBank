@@ -40,12 +40,25 @@ public class Teller
      */
     public static void main(String args[])
     {
-        Customer c1 = new Customer("Chandra", "Irawan", null);
-        Savings s1 = new Savings(c1, 500);
-        Investment i1 = new Investment(c1, 1000, 12);
-        s1.addDailyInterest(280);
-        i1.addDailyInterest(280);
-        
+        Customer c = new Customer("Chandra", "Irawan", null);
+        Savings s = new Savings(c, 500);
+        Investment i = new Investment(c, 1000, 12);
+        s.addDailyInterest(280);
+        i.addDailyInterest(280);
+        OverDraftProtect o = new OverDraftProtect(c, 1500, s);
+        LineOfCredit l = new LineOfCredit (c, 3000, 1000);
+        c.addAccount(s);
+        c.addAccount(i);
+        c.addAccount(o);
+        c.addAccount(l);
+        System.out.println("Sebelum di Tarik\n");
+        c.printAllAccounts();
+        o.withdraw(1000);
+        o.withdraw(800);
+        l.withdraw(2000);
+        l.withdraw(2000);
+        System.out.println("Setelah di Tarik\n");
+        c.printAllAccounts();
         /*
         Account account = new Account();
         

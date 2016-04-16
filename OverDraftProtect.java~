@@ -12,7 +12,7 @@ public class OverDraftProtect extends Checking
     public OverDraftProtect(Customer cust, double amount, Savings save) 
     {
         super();
-        id = Integer.toString(cust.getCustID());
+        id = Integer.toString(cust.getCustId());
         balance = amount;
         savingsAccount = save;
     }

@@ -143,8 +143,8 @@ public abstract class Account
             System.out.println("Line-Of-Credit");
             System.out.println("    Credit Balance:   "+ l.getCreditBalance());
             System.out.println("    Monthly Fee   :   "+ l.getMonthlyFee());
-        } else if ( this instanceof OverDraftProtect) {
-            OverDraftProtect o = (OverDraftProtect)this;
+        } else if ( this instanceof OverDraftProtection) {
+            OverDraftProtection o = (OverDraftProtect)this;
             System.out.println("Overdraft Protection");
             System.out.println("    Monthly Fee   :   "+ o.getMonthlyFee());
         } else if ( this instanceof Investment) {

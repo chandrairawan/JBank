@@ -12,8 +12,7 @@ import javax.swing.*;
  */
 
 
-public class ATMGUI extends JFrame {
-
+public class ATMGUI extends JPanel {
 	private JMenuBar menuBar;
 	private JButton button1;
 	private JButton button2;
@@ -29,7 +28,8 @@ public class ATMGUI extends JFrame {
 	private JTextField textfield2;
 
 	//Constructor 
-	public ATMGUI(){
+	public ATMGUI()
+	{
 
 		this.setTitle("ATMGUI");
 		this.setSize(796,440);
@@ -177,7 +177,8 @@ public class ATMGUI extends JFrame {
 	
 
 
-	 public static void main(String[] args){
+	 public static void main(String[] args)
+	 {
 		System.setProperty("swing.defaultlaf", "com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
 		javax.swing.SwingUtilities.invokeLater(new Runnable() {
 			public void run() {

@@ -140,7 +140,7 @@ public class Customer
                     acct = a;
                 }
                 break;
-                case 'O' : if(a instanceof OverDraftProtect) {
+                case 'O' : if(a instanceof OverDraftProtection) {
                     acct = a;
                 }
                 break;
@@ -297,7 +297,7 @@ public class Customer
                     accountRemoved = true;
                 }
                 break;
-                case 'O' : if ( accounts[i] instanceof OverDraftProtect) {
+                case 'O' : if ( accounts[i] instanceof OverDraftProtection) {
                     accounts[i] = null;
                     indexArrayAccount--;
                     numberOfCurrentAccounts--;
