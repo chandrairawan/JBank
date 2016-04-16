@@ -4,7 +4,7 @@ import java.lang.Exception;
  * Class AmountOverDrawnException.
  * 
  * @author Abdul Chandra Irawan 
- * @version 14.04.2016
+ * @version 16.04.2016
  */
 public class AmountOverDrawnException extends Exception
 {
@@ -22,7 +22,8 @@ public class AmountOverDrawnException extends Exception
     public String getMessage()
     {
         String message = "Account Type Not Found !";
-        if(acctType instanceof Savings) {
+        
+        if(acctType instanceof Savings && !(acctType instanceof Investment)) {
             message = super.getMessage() + " in Savings Account";
         }
         else if(acctType instanceof Investment) {
@@ -32,8 +33,9 @@ public class AmountOverDrawnException extends Exception
             message = super.getMessage() + " in Line-Of-Credit Account";
         }
         else if(acctType instanceof OverDraftProtection) {
-            message = super.getMessage() + " in Overdraft Protect Account";
+            message = super.getMessage() + " in Overdraft Protection Account";
         }
+        
         return message;
     }
 }

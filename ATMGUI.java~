@@ -6,185 +6,159 @@ import javax.swing.*;
 
 /**
  * JBank Program
+ * Class ATMGUI.
  * 
  * @author Abdul Chandra Irawan - 1306405244
- * @version 08.04.2016
+ * @version 16.04.2016
  */
 
 
 public class ATMGUI extends JPanel {
-	private JMenuBar menuBar;
-	private JButton button1;
-	private JButton button2;
-	private JButton button4;
-	private JLabel label1;
-	private JLabel label2;
-	private JRadioButton radiobutton2;
-	private JRadioButton radiobutton3;
-	private JRadioButton radiobutton4;
-	private JRadioButton radiobutton5;
-	private JTextArea textarea3;
-	private JTextField textfield1;
-	private JTextField textfield2;
+    private JFrame hugeFrame;
+    private JTextField custIdText, amountText;
+    public JTextArea text;
+    private JLabel custIdLabel, amountLabel;
+    private JButton btnDeposit, btnWithdraw, btnExit, btnTotal;
+    private JRadioButton savingsRB, investmentRB, locRB, overdraftRB;
+    private ButtonGroup bgType;
 
-	//Constructor 
-	public ATMGUI()
-	{
+    //Constructor 
+    public ATMGUI()
+    {
+         BuildGUI();
+    }
+    
+    public static void main(String[] args)
+    {
+         ATMGUI atm = new ATMGUI();
+         atm.showATM();
+    }
 
-		this.setTitle("ATMGUI");
-		this.setSize(796,440);
-		//menu generate method
-		
-		this.setJMenuBar(menuBar);
+    /**
+     */
+    private void BuildGUI()
+    {
+        hugeFrame = new JFrame("ATM");
+        hugeFrame.setSize(600,400);
+       
+        hugeFrame.addWindowListener(new ATMWindowHandler() 
+        {
+            public void windowClosing(ATMWindowHandler WindowEvent){
+                System.exit(0);
+            }
+        });
+        hugeFrame.setVisible(true);
+    }
 
-		//pane with null layout
-		JPanel contentPane = new JPanel(null);
-		contentPane.setPreferredSize(new Dimension(796,440));
-		contentPane.setBackground(new Color(102,102,102));
+    /**
+     */
+    public void showATM()
+    {
+        JPanel thePanel = new JPanel();
+        thePanel.setLayout(new BoxLayout(thePanel, BoxLayout.Y_AXIS));
+       
+        custIdLabel = new JLabel("Enter customer id :");
+        custIdText = new JTextField(7);
+        amountLabel = new JLabel("Enter amount :");
+        amountText = new JTextField(7);
+        savingsRB = new JRadioButton("Savings");
+        investmentRB = new JRadioButton("Investment");
+        locRB = new JRadioButton("Line Of Credit");
+        overdraftRB = new JRadioButton("Overdraft");
+       
+        JPanel panelType = new JPanel();
+        panelType.setLayout(new BoxLayout(panelType, BoxLayout.Y_AXIS));
+        panelType.setBorder(BorderFactory.createTitledBorder("Account type"));
+        //BoxLayout layoutType = new BoxLayout(panelType, BoxLayout.Y_AXIS);
+       
+        ButtonGroup bgType = new ButtonGroup();
+        bgType.add(savingsRB);
+        bgType.add(investmentRB);
+        bgType.add(locRB);
+        bgType.add(overdraftRB);
+        savingsRB.setSelected(true);
+       
+        panelType.add(savingsRB);
+        panelType.add(investmentRB);
+        panelType.add(locRB);
+        panelType.add(overdraftRB);
+       
+        JPanel infoPanel = new JPanel();
+        infoPanel.setPreferredSize(new Dimension(600, 150));
+        infoPanel.setBorder(BorderFactory.createTitledBorder("Account's Information :"));
+       
+        infoPanel.add(custIdLabel);
+        infoPanel.add(custIdText);
+        infoPanel.add(panelType);
+        infoPanel.add(amountLabel);
+        infoPanel.add(amountText);
+       
+        thePanel.add(infoPanel);
+       
+        JPanel panelSide = new JPanel();
+        panelSide.setLayout(new GridLayout(4,1));
+       
+        btnDeposit = new JButton("Deposit");
+        btnDeposit.addActionListener(new ATMButtonHandler(this));
+        btnWithdraw = new JButton("Withdraw");
+        btnWithdraw.addActionListener(new ATMButtonHandler(this));
+        btnExit = new JButton("Exit");
+        btnExit.setActionCommand("Exit");
+        btnExit.addActionListener(new ButtonHandler(this));
+        btnTotal = new JButton ("Total");
+        
+       
+        panelSide.add(btnDeposit);
+        panelSide.add(btnWithdraw);
+        panelSide.add(btnTotal);
+        panelSide.add(btnExit);
+       
+        JPanel textPanel = new JPanel();
+        textPanel.setPreferredSize(new Dimension(600,350));
+        textPanel.setLayout(new BoxLayout(textPanel, BoxLayout.X_AXIS));
+       
+        text = new JTextArea();
+        text.setFont(new Font("Arial", Font.BOLD, 12));
+        text.setBackground(Color.black);
+        text.setEditable(false);
+        text.setForeground(Color.white);
+        text.setText("Hello, Welcome To Program JBank");
+       
+        JScrollPane scrollText = new JScrollPane (text, 
+        JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, 
+        JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+       
+        textPanel.add(scrollText);
+        textPanel.add(panelSide);
+       
+        thePanel.add(textPanel);
+       
+        hugeFrame.add(thePanel);
+        hugeFrame.setVisible(true);
+    }
+    
+    /**
+     */
+    public String getTextArea()
+    {
+        String textDisplay = text.getText();
+        return textDisplay;
+    }
 
+    /**
+     */
+    public String getIDcostumer()
+    {
+        String id = custIdText.getText();
+        return id;
+    }
 
-		button1 = new JButton();
-		button1.setBounds(612,130,95,58);
-		button1.setBackground(new Color(214,217,223));
-		button1.setForeground(new Color(0,0,0));
-		button1.setEnabled(true);
-		button1.setFont(new Font("sansserif",0,12));
-		button1.setText("Deposit");
-		button1.setVisible(true);
-
-		button2 = new JButton();
-		button2.setBounds(616,199,96,61);
-		button2.setBackground(new Color(214,217,223));
-		button2.setForeground(new Color(0,0,0));
-		button2.setEnabled(true);
-		button2.setFont(new Font("sansserif",0,12));
-		button2.setText("Withdraw");
-		button2.setVisible(true);
-
-		button4 = new JButton();
-		button4.setBounds(620,270,93,61);
-		button4.setBackground(new Color(214,217,223));
-		button4.setForeground(new Color(0,0,0));
-		button4.setEnabled(true);
-		button4.setFont(new Font("sansserif",0,12));
-		button4.setText("Exit");
-		button4.setVisible(true);
-
-		label1 = new JLabel();
-		label1.setBounds(9,34,108,27);
-		label1.setBackground(new Color(214,217,223));
-		label1.setForeground(new Color(0,0,0));
-		label1.setEnabled(true);
-		label1.setFont(new Font("sansserif",0,12));
-		label1.setText("Enter customer id");
-		label1.setVisible(true);
-
-		label2 = new JLabel();
-		label2.setBounds(441,35,104,24);
-		label2.setBackground(new Color(214,217,223));
-		label2.setForeground(new Color(0,0,0));
-		label2.setEnabled(true);
-		label2.setFont(new Font("sansserif",0,12));
-		label2.setText("Enter amount here");
-		label2.setVisible(true);
-
-		radiobutton2 = new JRadioButton();
-		radiobutton2.setBounds(219,11,90,35);
-		radiobutton2.setBackground(new Color(214,217,223));
-		radiobutton2.setForeground(new Color(0,0,0));
-		radiobutton2.setEnabled(true);
-		radiobutton2.setFont(new Font("sansserif",0,12));
-		radiobutton2.setText("Savings");
-		radiobutton2.setVisible(true);
-
-		radiobutton3 = new JRadioButton();
-		radiobutton3.setBounds(221,33,90,35);
-		radiobutton3.setBackground(new Color(214,217,223));
-		radiobutton3.setForeground(new Color(0,0,0));
-		radiobutton3.setEnabled(true);
-		radiobutton3.setFont(new Font("sansserif",0,12));
-		radiobutton3.setText("Investement");
-		radiobutton3.setVisible(true);
-
-		radiobutton4 = new JRadioButton();
-		radiobutton4.setBounds(223,50,100,35);
-		radiobutton4.setBackground(new Color(214,217,223));
-		radiobutton4.setForeground(new Color(0,0,0));
-		radiobutton4.setEnabled(true);
-		radiobutton4.setFont(new Font("sansserif",0,12));
-		radiobutton4.setText("Line of Credit");
-		radiobutton4.setVisible(true);
-
-		radiobutton5 = new JRadioButton();
-		radiobutton5.setBounds(223,70,90,35);
-		radiobutton5.setBackground(new Color(214,217,223));
-		radiobutton5.setForeground(new Color(0,0,0));
-		radiobutton5.setEnabled(true);
-		radiobutton5.setFont(new Font("sansserif",0,12));
-		radiobutton5.setText("Overdraft");
-		radiobutton5.setVisible(true);
-
-		textarea3 = new JTextArea();
-		textarea3.setBounds(5,132,592,265);
-		textarea3.setBackground(new Color(255,255,255));
-		textarea3.setForeground(new Color(0,0,0));
-		textarea3.setEnabled(true);
-		textarea3.setFont(new Font("sansserif",0,12));
-		textarea3.setText("Welcome");
-		textarea3.setBorder(BorderFactory.createBevelBorder(1));
-		textarea3.setVisible(true);
-
-		textfield1 = new JTextField();
-		textfield1.setBounds(110,36,104,24);
-		textfield1.setBackground(new Color(255,255,255));
-		textfield1.setForeground(new Color(0,0,0));
-		textfield1.setEnabled(true);
-		textfield1.setFont(new Font("sansserif",0,12));
-		textfield1.setText("");
-		textfield1.setVisible(true);
-
-		textfield2 = new JTextField();
-		textfield2.setBounds(553,34,116,26);
-		textfield2.setBackground(new Color(255,255,255));
-		textfield2.setForeground(new Color(0,0,0));
-		textfield2.setEnabled(true);
-		textfield2.setFont(new Font("sansserif",0,12));
-		textfield2.setText("");
-		textfield2.setVisible(true);
-
-		//adding components to contentPane panel
-		contentPane.add(button1);
-		contentPane.add(button2);
-		contentPane.add(button4);
-		contentPane.add(label1);
-		contentPane.add(label2);
-		contentPane.add(radiobutton2);
-		contentPane.add(radiobutton3);
-		contentPane.add(radiobutton4);
-		contentPane.add(radiobutton5);
-		contentPane.add(textarea3);
-		contentPane.add(textfield1);
-		contentPane.add(textfield2);
-
-		
-		this.add(contentPane);
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setLocationRelativeTo(null);
-		this.pack();
-		this.setVisible(true);
-	}
-
-	
-
-
-	 public static void main(String[] args)
-	 {
-		System.setProperty("swing.defaultlaf", "com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
-		javax.swing.SwingUtilities.invokeLater(new Runnable() {
-			public void run() {
-				new ATMGUI();
-			}
-		});
-	}
+    /**
+     */
+    public String getNominal()
+    {
+        String amount = amountText.getText();
+        return amount;
+    }
 
 }

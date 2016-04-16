@@ -1,10 +1,10 @@
 import java.lang.Exception;
 
 /**
- * Write a description of class AccountTypeAlreadyExistException here.
+ * Class AccountTypeAlreadyExistException.
  * 
  * @author Abdul Chandra Irawan
- * @version 14.04.2016
+ * @version 16.04.2016
  */
 public class AccountTypeAlreadyExistException extends Exception
 {

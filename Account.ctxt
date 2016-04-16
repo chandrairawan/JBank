@@ -16,8 +16,7 @@ comment4.target=boolean\ withdraw(double)
 comment4.text=\r\n\ membuat\ fungsi\ withdraw\r\n\ @param\ amount,\ jumlah\ penarikan\ tidak\ boleh\ membuat\ balance\ menjadi\ negatif\r\n\ @return\ true,\ false\r\n
 comment5.params=
 comment5.target=java.lang.String\ toString()
-comment5.text={\r\n\ \ \ \ \ \ \ \ predictBalance\ \=\ balance\ -\ amount;\r\n\ \ \ \ \ \ \ \ \r\n\ \ \ \ \ \ \ \ if\ (predictBalance\ <\ 0)\r\n\ \ \ \ \ \ \ \ {\r\n\ \ \ \ \ \ \ \ \ \ \ \ return\ false;\r\n\ \ \ \ \ \ \ \ }\r\n\ \ \ \ \ \ \ \ else\r\n\ \ \ \ \ \ \ \ {\r\n\ \ \ \ \ \ \ \ \ \ \ \ balance\ \=\ balance\ -\ amount;\r\n\ \ \ \ \ \ \ \ \ \ \ \ return\ true;\r\n\ \ \ \ \ \ \ \ }\r\n\ \ \ \ \ \ \ \ return\ ;\r\n\ \ \ \ }*\r\n\ \ \ \ \r\n\ \ \ \ /**\r\n\ Menampilkan\ informasi\ tipe\ akun,\ ID,\ &\ Balance\r\n
 comment6.params=balance\ rate\ compound\ period
 comment6.target=double\ futureValue(double,\ double,\ double,\ double)
-comment6.text=\r\n\ An\ example\ of\ a\ method\ -\ replace\ this\ comment\ with\ your\ own\r\n\r\n\ @param\ \ y\ \ \ a\ sample\ parameter\ for\ a\ method\r\n\ @return\ \ \ \ \ the\ sum\ of\ x\ and\ y\r\n
+comment6.text=\r\n
 numComments=7

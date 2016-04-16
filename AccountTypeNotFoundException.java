@@ -4,7 +4,7 @@ import java.lang.Exception;
  * Class AccountTypeNotFoundException.
  * 
  * @author Abdul Chandra Irawan
- * @version 14.04.2016
+ * @version 16.04.2016
  */
 public class AccountTypeNotFoundException extends Exception
 {

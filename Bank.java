@@ -1,13 +1,14 @@
 import java.util.*;
 import java.text.*;
 import java.io.*;
+import java.time.*;
 
 /**
  * JBank Program
  * Bank class
  * 
  * @author Abdul Chandra Irawan - 1306405244
- * @version 27.03.2016
+ * @version 16.04.2016
  */
 
 
@@ -17,21 +18,21 @@ public class Bank
      * deklarasi variabel 
      */
     private static double creditInterestRate;
-    private static Date closeTime = null;
+    private static Date closeTime;
     private static double investmentInterestRate;
     private static int lastCustID;
-    private static int nextCustID;
+    private static int nextCustID = 0;
     private static double premiumInterestRate;
-    private static Date startTime = null;
+    private static Date startTime;
     public static String bankAddress = "1234 JavaStreet, AnyCity, ThisState, 34567";
     public static int maxNumOfAcctsPerCustomers = 4;
     private static int MAX_NUM_OF_CUSTOMERS;
     public static String bankName= "JBANK"; 
-    private static String phone;
+    private static String phone, strDateFormat;
     public static String website;
-    public static int numOfCurrentCustomers;
+    public static int numOfCurrentCustomers = 0;
     private static int nextId; 
-    private static Customer[] customers = new Customer[MAX_NUM_OF_CUSTOMERS];;
+    private static Customer[] customers = new Customer[MAX_NUM_OF_CUSTOMERS];
   
     
     static
@@ -56,7 +57,7 @@ public class Bank
             if(customers[i] == null)
             {
                 customers[i] = customer;
-                return false;
+                return true;
             }
         }
         return false;
@@ -106,9 +107,11 @@ public class Bank
      */
     public static String getHoursOfOperation() 
     {
-        SimpleDateFormat ft = new SimpleDateFormat("hh:mm a");
-        return ft.format(startTime) +" TO "+ ft.format(closeTime);
-        //return new Date(ctime.getTime() - stime.getTime()); 
+        String start, close;
+        SimpleDateFormat sdf = new SimpleDateFormat (strDateFormat);
+        start = sdf.format(startTime);
+        close = sdf.format(closeTime);
+        return start+" TO "+close;
     }
     
     /**
@@ -123,12 +126,11 @@ public class Bank
     /**
      * membuat fungsi getMaxCustomers
      * @return maxNumOfCustomers
-     */
+     *//*
     public static int getMaxCustomers() 
     {
-        //return maxNumOfCustomers;
         return MAX_NUM_OF_CUSTOMERS;
-    }
+    }*/
     
     /**
      * membuat fungsi getName
@@ -158,7 +160,6 @@ public class Bank
             {   
                 lastCustID = 1000;
                 nextID = 1000;
-                //nextCustID=1000;
                 nextCustID=nextID;
             }
             else
@@ -166,7 +167,6 @@ public class Bank
                 lastCustID=nextCustID;
                 nextID = lastCustID+1;
                 nextCustID=nextID;
-                //nextID=nextCustID;
             }
             numOfCurrentCustomers ++;
         }

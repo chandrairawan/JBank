@@ -5,7 +5,7 @@
  * @author Abdul Chandra Irawan 
  * @version 27.03.2016
  */
-public class Savings 
+public class Savings extends Account 
 {
     protected double interestEarned;
 

@@ -10,36 +10,24 @@ import java.lang.Math;
  * Customer class
  * 
  * @author Abdul Chandra Irawan - 1306405244
- * @version 27.03.2016
+ * @version 16.04.2016
  */
 
 public class Teller
 {
-    /**
-     * Deklarasi variabel class :
-     */
-    
-
-    
-    
-    //public Customer c1 = new Customer(); //Objek Customer dan menyimpannya dalam variabel c1
-    //public Account a1 = new Account (); //Objek Account
-    //public String fullname; //objek nama costumer
-    //public Account acct; //objek Account
-    //public double Balance; //objek balance
-    /*
-    aprivate static Date ctime, stime;
-    
-    //Modul 4
-    private static MathContext mc = new MathContext(8);
-    private static MathContext mc1 = new MathContext(3);
-    */
+    private static MathContext mc = new MathContext(3);
+    private static Date ctime, stime; 
     
     /**
      * Main Method in Teller Class
      */
     public static void main(String args[])
     {
+        //Modul 7
+        ATMGUI atm = new ATMGUI();
+        atm.showATM();
+    }
+        /*
         Customer c = new Customer("Chandra", "Irawan", null);
         Savings s = new Savings(c, 500);
         Investment i = new Investment(c, 1000, 12);
@@ -275,8 +263,8 @@ public class Teller
         }
         else{
             System.out.println("Finish. Terima Kasih");
-        }*/
-    }
+        }
+    }*/
     
     /**
      * Constructor untuk objek Teller
@@ -344,5 +332,51 @@ public class Teller
         System.out.println("Balance Saving : " +f4S.doubleValue());
         System.out.println("Balance Investment : " +f4I.doubleValue());
         System.out.println("Balance Credit : " +f4L.doubleValue());*/
+    }
+    
+    public static void setStartTime(int year,int month,int day, int hour, int min) 
+    {
+        stime = new GregorianCalendar(year, month, day, hour, min).getTime();
+    }
+    
+    public Customer createNewCustomer(String fname, String lname, Date DOB) {
+        return new Customer(fname, lname, DOB);
+    }
+    
+    public Customer getCustomer(int customerID) {
+        return new Customer();
+    }
+    
+    public static void setCloseTime(int year,int month,int day,int hour, int min) {
+        ctime = new GregorianCalendar(year, month, day, hour, min).getTime();
+    }
+    
+    public static void printTime() {
+        System.out.println(Bank.getHoursOfOperation());
+    }
+    
+    public static double futureValue(double balance, double rate, double compound, double period) 
+    {
+        BigDecimal bal = new BigDecimal (balance);
+        BigDecimal r = new BigDecimal (rate);
+        BigDecimal n = new BigDecimal (compound);
+        BigDecimal t = new BigDecimal (period);
+        BigDecimal f1 = r.divide(n, mc.DECIMAL32).add(new BigDecimal(1));
+        BigDecimal f2 = n.multiply(t, mc.DECIMAL32);
+        BigDecimal f3 = new BigDecimal (Math.pow(f1.doubleValue(), f2.doubleValue()),mc.DECIMAL32);
+        BigDecimal f4 = f3.multiply(bal, mc.DECIMAL32);
+        return f4.doubleValue();
+    }
+    
+    public static void getAccount(Customer customer)
+    {
+        for (int x = 0; x < customer.accounts.length; x++)
+        {
+            if (customer.accounts[x] != null)
+            {
+                System.out.println("Account : " + customer.accounts[0].getId());
+                System.out.println("Balance : " + customer.accounts[0].getBalance());
+            }
+        }
     }
 }

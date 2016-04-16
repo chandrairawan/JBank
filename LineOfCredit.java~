@@ -9,7 +9,7 @@ import java.math.MathContext;
  * Write a description of class LineOfCredit here.
  * 
  * @author Abdul Chandra Irawan 
- * @version 27.03.2016
+ * @version 16.04.2016
  */
 public class LineOfCredit extends Checking 
 {
@@ -18,7 +18,7 @@ public class LineOfCredit extends Checking
     public LineOfCredit (Customer cust, double amount, double creditAmount) 
     {
         super();
-        ID = Integer.toString(cust.getCustID());
+        id = Integer.toString(cust.getCustId());
         balance = amount;
         creditBalance = creditAmount;
         creditLimit = creditAmount;

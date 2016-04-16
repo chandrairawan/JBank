@@ -1,0 +1,11 @@
+#BlueJ class context
+comment0.params=cust\ amount\ save
+comment0.target=OverDraftProtection(Customer,\ double,\ Savings)
+comment0.text=\r\n\ Constructor\ OverDraftProtection\r\n\ \r\n\ @param\ cust.getCustId()\r\n\ @param\ amount\r\n\ @param\ save\r\n
+comment1.params=
+comment1.target=void\ feeAssessment()
+comment1.text=\r\n\ method\ feeAssessment\r\n
+comment2.params=amount
+comment2.target=boolean\ withdraw(double)
+comment2.text=\r\n\ Method\ Withdraw\r\n\ \r\n\ @param\ amount\r\n
+numComments=3

@@ -4,10 +4,10 @@ import java.math.MathContext;
 
 /**
  * JBank Program
- * Account class
+ * Class Account. 
  * 
  * @author Abdul Chandra Irawan - 1306405244 
- * @version 27.03.2016
+ * @version 16.04.2016
  */
 public abstract class Account
 {
@@ -17,7 +17,7 @@ public abstract class Account
     //private char acctType;
     protected double balance;
     protected String id;
-    protected MathContext mc = new MathContext(3);
+    protected static MathContext mc = new MathContext(3);
     
     /**
      * membuat fungsi Account
@@ -89,7 +89,7 @@ public abstract class Account
      */
     public void setBalance(double amount) 
     {
-        this.balance = amount;
+        balance = amount;
     }
     
     /**
@@ -115,25 +115,7 @@ public abstract class Account
      * @return true, false
      */
     public abstract boolean withdraw(double amount); 
-    /*{
-        predictBalance = balance - amount;
-        
-        if (predictBalance < 0)
-        {
-            return false;
-        }
-        else
-        {
-            balance = balance - amount;
-            return true;
-        }
-        return ;
-    }*
     
-    /**
-     * Menampilkan informasi tipe akun, ID, & Balance
-     */
-    @Override
     public String toString() 
     {
         if ( this instanceof Savings && !(this instanceof Investment)) {
@@ -155,14 +137,9 @@ public abstract class Account
     }
     
     /**
-     * An example of a method - replace this comment with your own
-     *
-     * @param  y   a sample parameter for a method
-     * @return     the sum of x and y
      */
     protected static double futureValue(double balance, double rate, double compound, double period) 
     {
-        MathContext mc = new MathContext(3);
         BigDecimal bal = new BigDecimal (balance);
         BigDecimal r = new BigDecimal (rate);
         BigDecimal n = new BigDecimal (compound);

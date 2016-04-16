@@ -14,7 +14,7 @@ import java.io.*;
  * Customer class
  * 
  * @author Abdul Chandra Irawan - 1306405244
- * @version 27.03.2016
+ * @version 16.04.2016
  */
 
 public class Customer
@@ -25,7 +25,7 @@ public class Customer
      * variabel bertipe string,variable berupa sekumpulan karakter
      * variabel bertipe integer, yaitu variabel berisi angka dengan batasan -32768 sampai 32767
      */
-    private Account[] accounts = new Account[4];
+    public Account[] accounts = new Account[4];
     private Account a;
     private String cityName;
     private int custId;

@@ -45,7 +45,7 @@ public class Teller
         Investment i = new Investment(c, 1000, 12);
         s.addDailyInterest(280);
         i.addDailyInterest(280);
-        OverDraftProtect o = new OverDraftProtect(c, 1500, s);
+        OverDraftProtection o = new OverDraftProtection(c, 1500, s);
         LineOfCredit l = new LineOfCredit (c, 3000, 1000);
         c.addAccount(s);
         c.addAccount(i);

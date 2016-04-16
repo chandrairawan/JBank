@@ -2,80 +2,39 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import java.math.BigDecimal;
+
 /**
- * GUI button handler
+ * Class ATMButtonHandler.
  * 
- * @author Danan Arya Pradana 1306368583 
- * @version 2016.04.07 (Modul 7)
+ * @author Abdul Chandra Irawan. 
+ * @version 14.04.2016
  */
 public class ATMButtonHandler implements ActionListener
 {
-    public String ID;
-    public BigDecimal amount = new BigDecimal(5000000000.00);
-    public BigDecimal amountEntered;
-    public String text;
-    public JTextField idfield;
-    public JTextField amountfield;
-    public JTextArea textarea;
+    private ATMGUI gui;
+    private String newline = "\n\n";
     
     /**
      * Constructor for objects of class ATMButtonHandler
      */
-    public ATMButtonHandler(JTextField idfield, JTextField amountfield, JTextArea textarea)
+    public ATMButtonHandler(ATMGUI gui)
     {
-        this.idfield = idfield;
-        this.amountfield = amountfield;
-        this.textarea = textarea;
+        this.gui=gui;
     }
     
-    public void actionPerformed(ActionEvent e)
+    public void actionPerformed(ActionEvent event)
     {
-        this.ID = idfield.getText();
-        this.amountEntered = new BigDecimal(Double.parseDouble(amountfield.getText()));
-
-        if(e.getActionCommand().equals("deposit")) {
-            this.amount = amount.add(amountEntered);
-            textarea.setText("" + ID 
-                + " saves an amount of money: Rp" 
-                + amountfield.getText());
+        JTextArea text = gui.text;
+        if(event.getActionCommand().equals("Deposit")){
+              text.append(newline + "Customer: " + gui.getIDcostumer() +" saves amount of money:" + gui.getNominal());
         }
-        else if(e.getActionCommand().equals("withdraw")) {
-            if(amountEntered.compareTo(amount) > 0) {
-                JOptionPane.showMessageDialog(null, "Transaction failed");
-            }
-            else {
-                this.amount = amount.subtract(amountEntered);
-                textarea.setText("" + ID 
-                    + " withdraws an amount of money: Rp" 
-                    + amountfield.getText());
-            }
+        else if(event.getActionCommand().equals("Withdraw")){
+            text.append(newline + "Customer: " + gui.getIDcostumer() +" withdraws amount of money:" + gui.getNominal());
         }
-        else if(e.getActionCommand().equals("total")) {
-            textarea.setText("Total amount of money in ATM: Rp" + amount);
-        }
-        else if(e.getActionCommand().equals("exit")) {
-            JOptionPane.showMessageDialog(null, "You are exiting, goodbye!");
+        else if(event.getActionCommand().equals("Exit")){
+            JOptionPane.showMessageDialog(null,"Thank you for your transaction and see you later ! :)");
             System.exit(0);
         }
-    }
-    
-    public String getID()
-    {
-        return ID;
-    }
-    
-    public BigDecimal getAmount() 
-    {
-        return amount;
-    }
-    
-    public String getText()
-    {
-        return text;
-    }
-    
-    public void setText(String text)
-    {
-        this.text = text;
+        
     }
 }

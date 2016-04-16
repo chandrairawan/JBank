@@ -9,12 +9,19 @@ import java.math.MathContext;
  * Write a description of class LineOfCredit here.
  * 
  * @author Abdul Chandra Irawan 
- * @version 27.03.2016
+ * @version 16.04.2016
  */
 public class LineOfCredit extends Checking 
 {
     private double creditBalance, creditLimit;
     
+    /**
+     * Constructor LineOfCredit
+     * 
+     * @param cust.getCustId()
+     * @param amount
+     * @param creditAmount
+     */
     public LineOfCredit (Customer cust, double amount, double creditAmount) 
     {
         super();
@@ -24,6 +31,9 @@ public class LineOfCredit extends Checking
         creditLimit = creditAmount;
     }
     
+    /**
+     * method feeAssessment
+     */
     public void feeAssessment() 
     {
         int days = new GregorianCalendar ().get(Calendar.DAY_OF_MONTH);
@@ -32,6 +42,11 @@ public class LineOfCredit extends Checking
         monthlyFee = new BigDecimal(financeCharge).subtract(new BigDecimal(deficit), mc.DECIMAL32).doubleValue();
     }
     
+    /**
+     * Method withdraw
+     * 
+     * @param amount
+     */
     public boolean withdraw (double amount) 
     {
         if ( ( balance + creditBalance >= amount)) {
@@ -48,21 +63,41 @@ public class LineOfCredit extends Checking
         }
     }
     
-    public double getCreditBalance () 
+    /**
+     * Method getCreditBalance
+     * 
+     * @return creditBalance
+     */
+    public double getCreditBalance() 
     {
         return creditBalance;
     }
     
-    public double getCreditLimit () 
+    /**
+     * Method getCreditLimit
+     * 
+     * @return creditLimit
+     */
+    public double getCreditLimit() 
     {
         return creditLimit;
     }
     
-    public void setCreditBalance (double amount) 
+    /**
+     * Method setCreditBalance
+     * 
+     * @param amount
+     */
+    public void setCreditBalance(double amount) 
     {
         creditBalance = amount;
     }
     
+    /**
+     * Method setCreditLimit
+     * 
+     * @param amount
+     */
     public void setCreditLimit (double amount) 
     {
         creditLimit = amount;
