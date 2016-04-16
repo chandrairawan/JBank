@@ -2,12 +2,11 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import java.math.BigDecimal;
-
 /**
- * Class ATMButtonHandler.
+ * GUI button handler
  * 
- * @author Abdul Chandra Irawan. 
- * @version 14.04.2016
+ * @author Danan Arya Pradana 1306368583 
+ * @version 2016.04.07 (Modul 7)
  */
 public class ATMButtonHandler implements ActionListener
 {
