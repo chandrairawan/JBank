@@ -4,7 +4,7 @@ import java.util.*;
  * Write a description of class Investment here.
  * 
  * @author Abdul Chandra Irawan 
- * @version 27.03.2016
+ * @version 16.04.2016
  */
 public class Investment extends Savings
 {

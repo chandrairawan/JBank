@@ -47,19 +47,18 @@ public class LineOfCredit extends Checking
      * 
      * @param amount
      */
-    public boolean withdraw (double amount) 
+    public boolean withdraw (double amount) throws AmountOverDrawnException
     {
-        if ( ( balance + creditBalance >= amount)) {
-            if (balance >= amount) {
-                balance -= amount;
-            } else {
-                creditBalance -= (amount - balance);
-                balance = 0;
-                feeAssessment();
-            }
+        if(amount > balance + creditBalance){
+            throw new AmountOverDrawnException(this);
+        } else if(amount > balance){
+            balance = 0;
+            creditBalance -= (amount - balance);
+            feeAssessment();
             return true;
-        } else {
-            return false;
+        } else{
+            balance -= amount;
+            return true;
         }
     }
     

@@ -14,7 +14,7 @@ public class Savings extends Account
      */
     public Savings(Customer cust, double amount)
     {
-        //super();
+        super();
         
         id = Integer.toString(cust.getCustId());
         super.balance = amount;
@@ -31,13 +31,13 @@ public class Savings extends Account
     /**
      * 
      */
-    public boolean withdraw(double amount)
+    public boolean withdraw(double amount)throws AmountOverDrawnException
     {
         if(balance - amount >= 10) {
-            balance = balance - amount;
+            balance-=amount;
             return true;
         } else {
-            return false;
+            throw new AmountOverDrawnException(this);
         }
     }
 

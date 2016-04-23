@@ -114,7 +114,7 @@ public abstract class Account
      * @param amount, jumlah penarikan tidak boleh membuat balance menjadi negatif
      * @return true, false
      */
-    public abstract boolean withdraw(double amount); 
+    public abstract boolean withdraw(double amount) throws AmountOverDrawnException; 
     
     public String toString() 
     {

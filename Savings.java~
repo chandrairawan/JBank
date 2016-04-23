@@ -3,7 +3,7 @@
  * Write a description of class Savings here.
  * 
  * @author Abdul Chandra Irawan 
- * @version 27.03.2016
+ * @version 16.04.2016
  */
 public class Savings extends Account 
 {
@@ -14,7 +14,7 @@ public class Savings extends Account
      */
     public Savings(Customer cust, double amount)
     {
-        //super();
+        super();
         
         id = Integer.toString(cust.getCustId());
         super.balance = amount;

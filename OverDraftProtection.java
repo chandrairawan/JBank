@@ -38,19 +38,18 @@ public class OverDraftProtection extends Checking
      * 
      * @param amount
      */
-    public boolean withdraw (double amount) 
+    public boolean withdraw (double amount) throws AmountOverDrawnException
     {
-        if ( ( balance + savingsAccount.getBalance() ) - amount >= 10) {
-            if (balance >= amount) {
-                balance -= amount;
-            } else {
-                savingsAccount.withdraw(amount - balance);
-                balance = 0;
-                feeAssessment();
-            }
+        if(amount > balance + (savingsAccount.getBalance() - 10)){
+            throw new AmountOverDrawnException(this);
+        } else if(amount > balance){
+            balance = 0;
+            savingsAccount.withdraw(amount - balance);
+            feeAssessment();
             return true;
-        } else {
-            return false;
+        } else{
+            balance = balance - amount;
+            return true;
         }
     }
 }

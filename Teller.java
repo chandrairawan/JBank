@@ -24,8 +24,65 @@ public class Teller
     public static void main(String args[])
     {
         //Modul 7
-        ATMGUI atm = new ATMGUI();
-        atm.showATM();
+        //ATMGUI atm = new ATMGUI();
+        //atm.showATM();
+        Bank b = new Bank();
+        String input;
+        Scanner scan = new Scanner(System.in);
+        //Account a = new Account();
+        Customer c = new Customer("Chandra","Irawan");
+        
+        Savings s = new Savings(c,500);
+        s.addDailyInterest(280); //6 bulan 10 hari = 280 hari
+        
+        Investment i = new Investment(c, 1000, 12);
+        i.addDailyInterest(280);
+        
+        OverDraftProtection o = new OverDraftProtection(c, 1500, s);
+        LineOfCredit l = new LineOfCredit (c, 3000, 1000);
+        
+        try {
+            c.addAccount(s);
+        } catch (AccountTypeAlreadyExistException e) {
+            System.out.println(e.getMessage());
+        }
+        
+        try {
+            c.addAccount(l);
+        } catch (AccountTypeAlreadyExistException e) {
+            System.out.println(e.getMessage());
+        }
+        
+        try {
+            c.addAccount(i);
+        } catch (AccountTypeAlreadyExistException e) {
+            System.out.println(e.getMessage());
+        }
+        
+        LineOfCredit l2 = new LineOfCredit (c, 500, 800);
+        try {
+            c.addAccount(l2);
+        } catch (AccountTypeAlreadyExistException e) {
+            System.out.println(e.getMessage());
+        }
+        
+        try {
+            c.getAccount('O');
+        } catch (AccountTypeNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+        
+        try {
+            s.withdraw(2000);
+        } catch (AmountOverDrawnException e) {
+            System.out.println(e.getMessage());
+        }
+        
+        b.addCustomer(c);
+        System.out.println("Akun:");
+        b.printAllCustomers();
+        c.printAllAccounts();
+        
     }
         /*
         Customer c = new Customer("Chandra", "Irawan", null);

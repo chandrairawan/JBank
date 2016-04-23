@@ -8,16 +8,16 @@ import java.lang.Exception;
  */
 public class AccountTypeAlreadyExistException extends Exception
 {
-    public char acctType;
+    //public char acctType;
     private Account accountType;
     
     /**
      * Constructor for objects of class AccountTypeAlreadyExistException
      */
-    public AccountTypeAlreadyExistException(char acctType)
+    public AccountTypeAlreadyExistException(Account type)
     {
         super("Unable to create duplicate account of type");
-        this.acctType = acctType;
+        accountType = type;
     }
     
     public String getMessage()

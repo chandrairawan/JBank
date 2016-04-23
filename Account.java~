@@ -115,24 +115,7 @@ public abstract class Account
      * @return true, false
      */
     public abstract boolean withdraw(double amount); 
-    /*{
-        predictBalance = balance - amount;
-        
-        if (predictBalance < 0)
-        {
-            return false;
-        }
-        else
-        {
-            balance = balance - amount;
-            return true;
-        }
-        return ;
-    }*
     
-    /**
-     * Menampilkan informasi tipe akun, ID, & Balance
-     */
     public String toString() 
     {
         if ( this instanceof Savings && !(this instanceof Investment)) {
@@ -154,10 +137,6 @@ public abstract class Account
     }
     
     /**
-     * An example of a method - replace this comment with your own
-     *
-     * @param  y   a sample parameter for a method
-     * @return     the sum of x and y
      */
     protected static double futureValue(double balance, double rate, double compound, double period) 
     {

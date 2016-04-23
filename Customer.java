@@ -49,7 +49,7 @@ public class Customer
     /**
      * 
      */
-    public boolean addAccount (Account acct) 
+    public boolean addAccount (Account acct) throws AccountTypeAlreadyExistException
     {
         boolean accountAdded = false, sameType = false;
         int index = -1;
@@ -59,8 +59,7 @@ public class Customer
                     index = i;
                 } else if (accounts[i] != null ) {
                     if (accounts[i].getClass().equals( acct.getClass() )){
-                        sameType = true;
-                        break;
+                        throw new AccountTypeAlreadyExistException(acct);
                     }
                 }
             }
@@ -127,30 +126,35 @@ public class Customer
      * Membuat fungsi getAccount untuk menerima nama akun
      * @return semua account yang dimiiki oleh satu customer
      */
-    public Account getAccount(char type)
+    public Account getAccount(char type) throws AccountTypeNotFoundException
     {
         Account acct = null;
-        for (Account a: accounts ) {
+        for (Account acc: accounts ) {
             switch (type) {
-                case 'S' : if( (a instanceof Savings) && !(a instanceof Investment) ) {
-                    acct = a;
+                case 'S' : if( (acc instanceof Savings) && !(acc instanceof Investment) ) {
+                    acct = acc;
+                    return acct;
                 }
                 break;
-                case 'L' : if(a instanceof LineOfCredit) {
-                    acct = a;
+                case 'L' : if(acc instanceof LineOfCredit) {
+                    acct = acc;
+                    return acct;
                 }
                 break;
-                case 'O' : if(a instanceof OverDraftProtection) {
-                    acct = a;
+                case 'O' : if(acc instanceof OverDraftProtection) {
+                    acct = acc;
+                    return acct;
                 }
                 break;
-                case 'I' : if(a instanceof Investment) {
-                    acct = a;
+                case 'I' : if(acc instanceof Investment) {
+                    acct = acc;
+                    return acct;
                 }
                 break;
             }   
         }
-        return acct;
+        //return acct;
+        throw new AccountTypeNotFoundException(type);
     }
     
     /**

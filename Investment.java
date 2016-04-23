@@ -45,10 +45,6 @@ public class Investment extends Savings
     }
 
     /**
-     * An example of a method - replace this comment with your own
-     * 
-     * @param  y   a sample parameter for a method
-     * @return     the sum of x and y 
      */
     @Override
     public void addDailyInterest(int days)
@@ -60,28 +56,25 @@ public class Investment extends Savings
     }
     
     /**
-     * An example of a method - replace this comment with your own
-     *
-     * @param  y   a sample parameter for a method
-     * @return     the sum of x and y
      */
-    public boolean withdraw(int amount)
+    public boolean withdraw(int amount) throws AmountOverDrawnException
     {
-        boolean check = false;
-        if(amount > balance) {
-            check = false;
+        if (balance - amount >= 100) {
+            if (Calendar.getInstance().before(endDate)) {
+                if ( (balance * 0.8) - amount >= 100 ) {
+                    balance *= 0.8;
+                    balance -= amount;
+                    return true;
+                } else {
+                    throw new AmountOverDrawnException(this);
+                }
+                
+            } else {
+                throw new AmountOverDrawnException(this);
+            }
+        } else {
+            throw new AmountOverDrawnException(this);
         }
-        else if(Calendar.getInstance().before(endDate)) {
-            check = false;
-        }
-        else if(amount > balance - (balance * (20/100))) {
-            check = false;
-        }
-        else {
-            balance = balance - (balance * (20/100)) - amount;
-            check = true;
-        }
-        return check;
     }
 
 }
