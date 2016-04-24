@@ -14,10 +14,10 @@ import java.io.*;
  * Customer class
  * 
  * @author Abdul Chandra Irawan - 1306405244
- * @version 16.04.2016
+ * @version 24.04.2016
  */
 
-public class Customer
+public class Customer implements Serializable
 {
     /**
      * Deklarasi variabel

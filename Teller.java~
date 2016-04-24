@@ -2,7 +2,8 @@ import java.util.*;
 import java.math.*;
 import java.text.*;
 import java.time.*;
-import java.lang.Math;
+import java.lang.*;
+import java.io.*;
 
 
 /**
@@ -10,13 +11,16 @@ import java.lang.Math;
  * Customer class
  * 
  * @author Abdul Chandra Irawan - 1306405244
- * @version 16.04.2016
+ * @version 24.04.2016
  */
 
 public class Teller
 {
     private static MathContext mc = new MathContext(3);
-    private static Date ctime, stime; 
+    private static Date ctime, stime;
+    private static SortedSet<Customer> custs1 = new TreeSet<>(Comparator.comparing(Customer::getCustId));
+    private ArrayList<Customer> custs = new ArrayList<Customer>();
+   
     
     /**
      * Main Method in Teller Class
@@ -24,8 +28,17 @@ public class Teller
     public static void main(String args[])
     {
         //Modul 7
-        //ATMGUI atm = new ATMGUI();
+        ATMGUI atm = new ATMGUI();
         atm.showATM();
+        CustomerFileWriter custWriter = new CustomerFileWriter();
+        CustomerFileReader custReader = new CustomerFileReader();
+        Teller teller = new Teller();
+        try {
+            teller.custs1 = new TreeSet<>(custReader.readCustomer());}
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        /*
         Bank b = new Bank();
         String input;
         Scanner scan = new Scanner(System.in);
@@ -81,7 +94,7 @@ public class Teller
         b.addCustomer(c);
         System.out.println("Akun:");
         b.printAllCustomers();
-        c.printAllAccounts();
+        c.printAllAccounts();*/
         
     }
         /*
@@ -396,12 +409,28 @@ public class Teller
         stime = new GregorianCalendar(year, month, day, hour, min).getTime();
     }
     
-    public Customer createNewCustomer(String fname, String lname, Date DOB) {
+    /*public Customer createNewCustomer(String fname, String lname, Date DOB) {
         return new Customer(fname, lname, DOB);
+    }*/
+    public void createNewCustomer (Customer customer)
+    {
+        custs.add(customer);
     }
     
-    public Customer getCustomer(int customerID) {
+    /*public static Customer getCustomer(int customerID) {
         return new Customer();
+    }*/
+    public static Customer getCustomer(int custId)
+    {
+        Customer c = null;
+        Iterator<Customer> it = custs1.iterator();
+        while (it.hasNext()) {
+            c = it.next();
+            if (c.getCustID() == custId) {
+                break;
+            }
+          }
+        return c;
     }
     
     public static void setCloseTime(int year,int month,int day,int hour, int min) {

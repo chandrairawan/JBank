@@ -5,7 +5,7 @@ import java.util.ArrayList;
  * Write a description of class CustomerFileReader here.
  * 
  * @author Abdul Chandra Irawan(1306405244) 
- * @version 21.04.2016
+ * @version 24.04.2016
  */
 public class CustomerFileReader
 {
@@ -20,7 +20,7 @@ public class CustomerFileReader
     {
     }
     
-    public ArrayList<Customer> readCustomer()
+    public ArrayList<Customer> readCustomer() throws IOException, ClassNotFoundException
     {
         ArrayList<Customer> customers = new ArrayList<Customer>();
         try {
@@ -29,11 +29,9 @@ public class CustomerFileReader
             objectInputStream = new ObjectInputStream(fileInputStream);
             customers = (ArrayList<Customer>) objectInputStream.readObject();
             objectInputStream.close();
-            fileInputStream.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException c) {
-            c.printStackTrace();
+            //fileInputStream.close();
+        } catch (Exception e) {
+            System.out.println("Exception Happened :" + e.getMessage());
         }
         return customers;
     }
