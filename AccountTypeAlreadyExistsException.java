@@ -6,7 +6,7 @@ import java.lang.Exception;
  * @author Abdul Chandra Irawan - 1306405244
  * @version 21.04.2016
  */
-public class AccountTypeAlreadyExistException extends Exception
+public class AccountTypeAlreadyExistsException extends Exception
 {
     private Account acct;
     
@@ -14,7 +14,7 @@ public class AccountTypeAlreadyExistException extends Exception
      * Constructor for objects of class AccountTypeAlreadyExistException
 	 * @param acct
      */
-    public AccountTypeAlreadyExistException(Account acct)
+    public AccountTypeAlreadyExistsException(Account acct)
     {
         super("Unable to create duplicate account of type");
         this.acct = acct;

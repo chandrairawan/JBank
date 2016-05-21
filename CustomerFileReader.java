@@ -1,11 +1,11 @@
 import java.io.*;
-import java.util.ArrayList;
+import java.util.*;
 
 /**
- * Write a description of class CustomerFileReader here.
+ * Class CustomerFileReader untuk mambaca info semua customer dari file customers.dat.
  * 
- * @author Abdul Chandra Irawan(1306405244) 
- * @version 24.04.2016
+ * @author Abdul Chandra Irawan - 1306405244
+ * @version 21.04.2016
  */
 public class CustomerFileReader
 {
@@ -20,18 +20,27 @@ public class CustomerFileReader
     {
     }
     
-    public ArrayList<Customer> readCustomer() throws IOException, ClassNotFoundException
+    /**
+     * Method readCustomer untuk membaca info customer dari file
+     * @return SortedSet customer
+     */
+    public SortedSet<Customer> readCustomer()
     {
-        ArrayList<Customer> customers = new ArrayList<Customer>();
+        SortedSet<Customer> customers = null;
         try {
-            objectFile = new File("C:/Users/Aspire P3/Documents/GitHub/JBank/dat/customers.dat");
+            objectFile = new File("dat/customers.dat");
             fileInputStream = new FileInputStream(objectFile);
             objectInputStream = new ObjectInputStream(fileInputStream);
-            customers = (ArrayList<Customer>) objectInputStream.readObject();
-            objectInputStream.close();
-            //fileInputStream.close();
-        } catch (Exception e) {
-            System.out.println("Exception Happened :" + e.getMessage());
+            try {
+                customers = (SortedSet<Customer>) objectInputStream.readObject();
+            } finally {
+                objectInputStream.close();
+                fileInputStream.close();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException c) {
+            c.printStackTrace();
         }
         return customers;
     }

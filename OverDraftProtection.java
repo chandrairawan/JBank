@@ -1,55 +1,56 @@
 
 /**
- * Class OverDraftProtection.
+ * Class OverDraftProtection sebagai memodelkan Account OverDraftProtection.
  * 
- * @author Abdul Chandra Irawan 
- * @version 16.04.2016
+ * @author Abdul Chandra Irawan - 1306405244
+ * @version 21.04.2016
  */
 public class OverDraftProtection extends Checking 
 {
     private Savings savingsAccount;
 
     /**
-     * Constructor OverDraftProtection
+     * Constructor for objects of class OverDraftProtection
      * 
-     * @param cust.getCustId()
-     * @param amount
-     * @param save
+     * @param cust.getCustId(), amount & save
      */
-    public OverDraftProtection(Customer cust, double amount, Savings save) 
+    public OverDraftProtection(Customer cust, double amount, Savings savingsAccount)
     {
         super();
-        id = Integer.toString(cust.getCustId());
+        
         balance = amount;
-        savingsAccount = save;
+        this.savingsAccount = savingsAccount;
+        ID = String.valueOf(cust.getCustID()) + "O";
     }
     
     /**
-     * method feeAssessment
+     * method feeAssessment untuk menghitung monthly fee
      */
     public void feeAssessment () 
     {
         monthlyFee += 3;
-        balance -= 3;
+        balance -= monthlyFee;
     }
     
     /**
-     * Method Withdraw
+     * Method Withdraw untuk melakukan pengambilan uang
      * 
-     * @param amount
+     * @param amount Jumlah uang yang akan diambil
+     * @throws AmountOverDrawnException Apabila jumlah uang yang akan diambil melebihi jumlah uang dalam akun
      */
-    public boolean withdraw (double amount) throws AmountOverDrawnException
+    @Override
+    public void withdraw(double amount) throws AmountOverDrawnException
     {
-        if(amount > balance + (savingsAccount.getBalance() - 10)){
+        if(amount > balance + savingsAccount.getBalance() - 10) {
             throw new AmountOverDrawnException(this);
-        } else if(amount > balance){
-            balance = 0;
+        }
+        else if(amount > balance) {
             savingsAccount.withdraw(amount - balance);
+            balance = 0;
             feeAssessment();
-            return true;
-        } else{
+        }
+        else {
             balance = balance - amount;
-            return true;
         }
     }
 }

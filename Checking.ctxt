@@ -4,8 +4,8 @@ comment0.target=void\ feeAssessment()
 comment0.text=\r\n\ Method\ abstract\ feeAssessment\r\n
 comment1.params=
 comment1.target=void\ resetMonthlyFee()
-comment1.text=\r\n\ Method\ resetMonthlyFee\r\n\ \r\n\ @param\ monthlyFee\ \=\ 0\r\n
+comment1.text=\r\n\ Method\ resetMonthlyFee\r\n\ @param\ monthlyFee\ \=\ 0\r\n
 comment2.params=
 comment2.target=double\ getMonthlyFee()
-comment2.text=\r\n\ Method\ getMonthlyFee\r\n\ \r\n\ @return\ monthlyFee\r\n
+comment2.text=\r\n\ Method\ getMonthlyFee\r\n\ @return\ monthlyFee\r\n
 numComments=3

@@ -1,75 +1,70 @@
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
+import java.util.*;
 import java.math.BigDecimal;
 import java.math.MathContext;
 
 /**
- * Write a description of class LineOfCredit here.
+ * Class LineOfCredit untuk memodelkan Account Line of Credit
  * 
- * @author Abdul Chandra Irawan 
- * @version 16.04.2016
+ * @author Abdul Chandra Irawan - 1306405244
+ * @version 21.04.2016
  */
 public class LineOfCredit extends Checking 
 {
-    private double creditBalance, creditLimit;
+    private double creditBalance;
+    private double creditLimit;
     
-    /**
+	/**
      * Constructor LineOfCredit
      * 
-     * @param cust.getCustId()
-     * @param amount
-     * @param creditAmount
+     * @param cust.getCustId(), amount, & creditAmount
      */
-    public LineOfCredit (Customer cust, double amount, double creditAmount) 
+    public LineOfCredit(Customer cust, double amount, double creditAmount)
     {
         super();
-        id = Integer.toString(cust.getCustId());
+        
+        ID = String.valueOf(cust.getCustID()) + "L";
         balance = amount;
-        creditBalance = creditAmount;
         creditLimit = creditAmount;
     }
     
     /**
-     * method feeAssessment
+     * method feeAssessment untuk menghitung montly fee
      */
     public void feeAssessment() 
     {
         int days = new GregorianCalendar ().get(Calendar.DAY_OF_MONTH);
-        double deficit = creditLimit - creditBalance, period = (double) days/365; 
-        double financeCharge = futureValue(deficit,0.21,360,period);
-        monthlyFee = new BigDecimal(financeCharge).subtract(new BigDecimal(deficit), mc.DECIMAL32).doubleValue();
+        double deficit = creditLimit - creditBalance;
+        double financeCharge = deficit*(Math.pow(((1 + (.21/365))), (1 * days)));
+        monthlyFee = financeCharge - deficit;
     }
     
-    /**
-     * Method withdraw
-     * 
-     * @param amount
+	/**
+     * Method accessor untuk mendapatkan balance credit
+     * @return Balance credit
      */
-    public boolean withdraw (double amount) throws AmountOverDrawnException
-    {
-        if(amount > balance + creditBalance){
-            throw new AmountOverDrawnException(this);
-        } else if(amount > balance){
-            balance = 0;
-            creditBalance -= (amount - balance);
-            feeAssessment();
-            return true;
-        } else{
-            balance -= amount;
-            return true;
-        }
-    }
-    
-    /**
-     * Method getCreditBalance
-     * 
-     * @return creditBalance
-     */
-    public double getCreditBalance() 
+    public double getCreditBalance()
     {
         return creditBalance;
+    }
+	
+    /**
+     * Method withdraw untuk melakukan pengambilan uang
+     * 
+     * @param amount yang akan diambil
+     * @throws AmountOverDrawnException Apabila melebihi jumlah uang dalam akun
+     */
+    @Override
+    public void withdraw(double amount) throws AmountOverDrawnException
+    {
+        if(amount > balance + creditLimit) {
+            throw new AmountOverDrawnException(this);
+        }
+        else if(amount > balance) {
+            creditBalance -= (amount - balance);
+            balance = 0;
+        } else{
+            balance -= amount;
+        }
     }
     
     /**
@@ -85,7 +80,7 @@ public class LineOfCredit extends Checking
     /**
      * Method setCreditBalance
      * 
-     * @param amount
+     * @param amounts
      */
     public void setCreditBalance(double amount) 
     {

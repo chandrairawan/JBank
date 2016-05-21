@@ -1,46 +1,31 @@
-import java.math.BigDecimal;
-import java.lang.Math;
-import java.math.MathContext;
+import java.io.Serializable;
 
 /**
  * JBank Program
- * Class Account. 
+ * Class Abstract Account. 
  * 
  * @author Abdul Chandra Irawan - 1306405244 
- * @version 16.04.2016
+ * @version 21.04.2016
  */
-public abstract class Account
+public abstract class Account implements Serializable
 {
-    /**
-     * Deklarasi variabel
-     */
-    //private char acctType;
     protected double balance;
-    protected String id;
-    protected static MathContext mc = new MathContext(3);
+    protected String ID;
     
     /**
-     * membuat fungsi Account
-     *//*
-    public Account(char type, double amount) 
-    {
-        acctType = type;
-        balance = amount;
-    }*/
-    
-    /**
-     * membuat fungsi Account
+     * Metode Constructor membuat fungsi Account
+	 * @param customer, amount dan type 
      *//*
     public Account(Customer cust, char type, double amount) 
     {
-        acctType = type;
-        balance = amount;
-        id = cust.getCustId()+ "" + type;
+        this.acctType = type;
+        this.balance = amount;
+        this.ID = cust.getCustId()+ "" + type;
     }*/
     
     /**
      * membuat fungsi deposit
-     * @param amount tidak boleh negatif
+     * @param (amount) uang yang simpan tidak boleh negatif
      * @return true, false
      */
     public boolean deposit(double amount) 
@@ -76,11 +61,11 @@ public abstract class Account
     
     /**
      * membuat fungsi getId
-     * @return id
+     * @return ID
      */
     public String getId() 
     {
-        return id; 
+        return ID; 
     }
     
     /**
@@ -89,7 +74,7 @@ public abstract class Account
      */
     public void setBalance(double amount) 
     {
-        balance = amount;
+        this.balance = amount;
     }
     
     /**
@@ -97,7 +82,7 @@ public abstract class Account
      * @param acctId untuk atribut objek ID
      *//*
     public void setID(String acctId) {
-        id = acctId;
+        ID = acctId;
     }*/
     
     /**
@@ -114,40 +99,15 @@ public abstract class Account
      * @param amount, jumlah penarikan tidak boleh membuat balance menjadi negatif
      * @return true, false
      */
-    public abstract boolean withdraw(double amount) throws AmountOverDrawnException; 
+    public abstract void withdraw(double amount) throws AmountOverDrawnException; 
     
+	/**
+     * Metode untuk mendapatkan no ID
+     * @return No ID
+     */
+    @Override
     public String toString() 
     {
-        if ( this instanceof Savings && !(this instanceof Investment)) {
-            System.out.println("SAVING");
-        } else if ( this instanceof LineOfCredit) {
-            LineOfCredit l = (LineOfCredit)this;
-            System.out.println("Line-Of-Credit");
-            System.out.println("    Credit Balance:   "+ l.getCreditBalance());
-            System.out.println("    Monthly Fee   :   "+ l.getMonthlyFee());
-        } else if ( this instanceof OverDraftProtection) {
-            OverDraftProtection o = (OverDraftProtection)this;
-            System.out.println("Overdraft Protection");
-            System.out.println("    Monthly Fee   :   "+ o.getMonthlyFee());
-        } else if ( this instanceof Investment) {
-            System.out.println("Investment");
-        }
-        System.out.println("    Balance       :   " + balance);
-        return "";
-    }
-    
-    /**
-     */
-    protected static double futureValue(double balance, double rate, double compound, double period) 
-    {
-        BigDecimal bal = new BigDecimal (balance);
-        BigDecimal r = new BigDecimal (rate);
-        BigDecimal n = new BigDecimal (compound);
-        BigDecimal t = new BigDecimal (period);
-        BigDecimal f1 = r.divide(n, mc.DECIMAL32).add(new BigDecimal(1));
-        BigDecimal f2 = n.multiply(t, mc.DECIMAL32);
-        BigDecimal f3 = new BigDecimal (Math.pow(f1.doubleValue(), f2.doubleValue()),mc.DECIMAL32);
-        BigDecimal f4 = f3.multiply(bal, mc.DECIMAL32);
-        return f4.doubleValue();
+        return ID;
     }
 }

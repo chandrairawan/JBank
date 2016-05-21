@@ -1,15 +1,13 @@
 import java.io.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.*;
 
 /**
- * class CustomerFileWriter.
+ * class CustomerFileWriter untuk menuliskan info customer kedalam file customers.dat
  * 
- * @author Abdul Chandra Irawan
- * @version 24.04.2016
+ * @author Abdul Chandra Irawan - 1306405244
+ * @version 21.04.2016
  */
-public class CustomerFileWriter implements Serializable
+public class CustomerFileWriter
 {
     private File objectFile;
     private FileOutputStream fileOutputStream;
@@ -22,19 +20,23 @@ public class CustomerFileWriter implements Serializable
     {
     }
     
-    public void saveCustomers(ArrayList<Customer> customers) throws IOException
+    /**
+     * Method untuk file writer untuk informasi customer
+     * 
+     * @param customers
+     */
+    public void saveCustomers(SortedSet<Customer> customers)
     {
         try {
-            objectFile = new File("C:/Users/Aspire P3/Documents/GitHub/JBank/dat/CustomerData.dat");
+            objectFile = new File("dat/customers.dat");
             objectFile.createNewFile();
             fileOutputStream = new FileOutputStream(objectFile);
-            BufferedOutputStream buffer = new BufferedOutputStream(fileOutputStream);
-            objectOutputStream = new ObjectOutputStream(buffer);
-            try{
+            objectOutputStream = new ObjectOutputStream(fileOutputStream);
+            try {
                 objectOutputStream.writeObject(customers);
-            }
-            finally{
+            } finally {
                 objectOutputStream.close();
+                fileOutputStream.close();
             }
         } catch (IOException e) {
             e.printStackTrace();

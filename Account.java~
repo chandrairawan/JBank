@@ -1,15 +1,16 @@
-import java.math.BigDecimal;
-import java.lang.Math;
-import java.math.MathContext;
+import java.io.Serializable;
+//import java.math.BigDecimal;
+//import java.lang.Math;
+//import java.math.MathContext;
 
 /**
  * JBank Program
  * Class Account. 
  * 
  * @author Abdul Chandra Irawan - 1306405244 
- * @version 16.04.2016
+ * @version 03.05.2016
  */
-public abstract class Account
+public abstract class Account implements Serializable
 {
     /**
      * Deklarasi variabel
@@ -17,7 +18,7 @@ public abstract class Account
     //private char acctType;
     protected double balance;
     protected String id;
-    protected static MathContext mc = new MathContext(3);
+    //protected static MathContext mc = new MathContext(3);
     
     /**
      * membuat fungsi Account
@@ -89,7 +90,7 @@ public abstract class Account
      */
     public void setBalance(double amount) 
     {
-        balance = amount;
+        this.balance = amount;
     }
     
     /**
@@ -114,7 +115,7 @@ public abstract class Account
      * @param amount, jumlah penarikan tidak boleh membuat balance menjadi negatif
      * @return true, false
      */
-    public abstract boolean withdraw(double amount); 
+    public abstract boolean withdraw(double amount) throws AmountOverDrawnException; 
     
     public String toString() 
     {

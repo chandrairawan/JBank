@@ -1,12 +1,12 @@
 import java.util.*;
 
 /**
- * Write a description of class Investment here.
+ * Class Investment yang memodelkan Account Investment.
  * 
- * @author Abdul Chandra Irawan 
- * @version 16.04.2016
+ * @author Abdul Chandra Irawan - 1306405244
+ * @version 21.04.2016
  */
-public class Investment extends Savings
+public final class Investment extends Savings
 {
     private Date startDate;
     private Date endDate;
@@ -15,10 +15,12 @@ public class Investment extends Savings
     
     /**
      * Constructor for objects of class Investment
+	 * @param cust, amount & months 
      */
     public Investment(Customer cust, double amount, int months)
     {
         super(cust, amount);
+        ID = String.valueOf(cust.getCustID()) + "I";
         
         if(months >= 6) {
             term = months;
@@ -45,10 +47,8 @@ public class Investment extends Savings
     }
 
     /**
-     * An example of a method - replace this comment with your own
-     * 
-     * @param  y   a sample parameter for a method
-     * @return     the sum of x and y 
+	 * Method addDailyInterest untuk menghitung interest yang didapatkan
+     * @param days Waktu penyimpanan uang dalam hari
      */
     @Override
     public void addDailyInterest(int days)
@@ -60,28 +60,26 @@ public class Investment extends Savings
     }
     
     /**
-     * An example of a method - replace this comment with your own
-     *
-     * @param  y   a sample parameter for a method
-     * @return     the sum of x and y
+	 * Metode untuk melakukan pengambilan uang
+     * @param amount Jumlah uang yang akan diambil
+     * @throws AmountOverDrawnException Apabila jumlah uang yang akan diambil melebihi jumlah uang dalam akun
      */
-    public boolean withdraw(int amount)
+    @Override
+    public void withdraw(int amount) throws AmountOverDrawnException
     {
-        boolean check = false;
         if(amount > balance) {
-            check = false;
+            throw new AmountOverDrawnException(this);
         }
-        else if(Calendar.getInstance().before(endDate)) {
-            check = false;
-        }
-        else if(amount > balance - (balance * (20/100))) {
-            check = false;
+        else if(Calendar.getInstance().getTime().before(endDate)) {
+            if(amount > (balance * 0.8)) {
+                throw new AmountOverDrawnException(this);
+            }
+            else {
+                balance = (balance * 0.8) - amount;
+            }
         }
         else {
-            balance = balance - (balance * (20/100)) - amount;
-            check = true;
+            balance = balance - amount;
         }
-        return check;
     }
-
 }

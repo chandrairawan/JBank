@@ -1,9 +1,9 @@
 
 /**
- * Write a description of class Savings here.
+ * Class Savings untuk membentuk isi dari Account Saving.
  * 
- * @author Abdul Chandra Irawan 
- * @version 16.04.2016
+ * @author Abdul Chandra Irawan - 1306405244 
+ * @version 21.04.2016
  */
 public class Savings extends Account 
 {
@@ -11,17 +11,21 @@ public class Savings extends Account
 
     /**
      * Constructor for objects of class Savings
+     * @param cust & amount
      */
     public Savings(Customer cust, double amount)
     {
         super();
         
-        id = Integer.toString(cust.getCustId());
-        super.balance = amount;
+        if(amount >= 10) {
+            ID = String.valueOf(cust.getCustID()) + "S";
+            balance = amount;
+        }
     }
 
     /**
-     * 
+     * Method getInterestEarned, merupakan accessor untuk mendapatkan interest yang didapatkan
+     * @return interestEarned
      */
     public double getInterestEarned()
     {
@@ -29,27 +33,28 @@ public class Savings extends Account
     }
     
     /**
-     * 
+     * Metode withdraw untuk pengambilan uang
+     * @param amount - yang diambil
+     * @throws AmountOverDrawnException jika melebihi jumlah uang dalam akun
      */
-    public boolean withdraw(double amount)throws AmountOverDrawnException
+    public void withdraw(double amount)throws AmountOverDrawnException
     {
         if(balance - amount >= 10) {
             balance-=amount;
-            return true;
         } else {
             throw new AmountOverDrawnException(this);
         }
     }
 
     /**
-     * 
+     * Metode addDailyInterest untuk menghitung interest
+     * @param days
      */
     public void addDailyInterest(int days)
     {
-        double A, period;
-        period = (double)days / 365;
-        A = futureValue(balance, 0.03, 360, period);
-        interestEarned = A - balance;
-        balance = A;
+        double A;
+        A = Math.pow(((1 + (.03/360))), (1*days));
+        interestEarned = (A*balance) - balance;
+        balance = balance*A;
     }
 }

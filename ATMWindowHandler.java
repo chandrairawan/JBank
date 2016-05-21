@@ -5,12 +5,19 @@ import java.awt.event.*;
 /**
  * Class ATMWindowHandler. 
  *
- * @author Abdul Chandra Irawan
- * @version 16.04.2016
+ * @author Abdul Chandra Irawan - 1306405244
+ * @version 21.04.2016
  */
 public class ATMWindowHandler extends WindowAdapter
 {
-   public void windowClosing(WindowEvent w){
+	/**
+     * Constructor for objects of class WindowHandler
+     */
+    public ATMWindowHandler()
+    {
+    }    
+    
+   public void windowClosing(WindowEvent windowEvent){
        quitMessage();
        System.exit(0);
    }

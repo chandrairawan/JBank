@@ -31,13 +31,13 @@ public class Savings extends Account
     /**
      * 
      */
-    public boolean withdraw(double amount)
+    public boolean withdraw(double amount)throws AmountOverDrawnException
     {
         if(balance - amount >= 10) {
-            balance = balance - amount;
+            balance-=amount;
             return true;
         } else {
-            return false;
+            throw new AmountOverDrawnException(this);
         }
     }
 
@@ -46,9 +46,9 @@ public class Savings extends Account
      */
     public void addDailyInterest(int days)
     {
-        double A, period;
-        period = (double)days / 365;
-        A = futureValue(balance, 0.03, 360, period);
+        double A;
+        period = days;
+        A = Math.pow(((1 + (.03/360))), (1*period));
         interestEarned = A - balance;
         balance = A;
     }

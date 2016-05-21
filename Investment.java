@@ -1,12 +1,12 @@
 import java.util.*;
 
 /**
- * Write a description of class Investment here.
+ * Class Investment yang memodelkan Account Investment.
  * 
- * @author Abdul Chandra Irawan 
- * @version 16.04.2016
+ * @author Abdul Chandra Irawan - 1306405244
+ * @version 21.04.2016
  */
-public class Investment extends Savings
+public final class Investment extends Savings
 {
     private Date startDate;
     private Date endDate;
@@ -15,10 +15,12 @@ public class Investment extends Savings
     
     /**
      * Constructor for objects of class Investment
+	 * @param cust, amount & months 
      */
     public Investment(Customer cust, double amount, int months)
     {
         super(cust, amount);
+        ID = String.valueOf(cust.getCustID()) + "I";
         
         if(months >= 6) {
             term = months;
@@ -45,6 +47,8 @@ public class Investment extends Savings
     }
 
     /**
+	 * Method addDailyInterest untuk menghitung interest yang didapatkan
+     * @param days Waktu penyimpanan uang dalam hari
      */
     @Override
     public void addDailyInterest(int days)
@@ -56,25 +60,26 @@ public class Investment extends Savings
     }
     
     /**
+	 * Metode untuk melakukan pengambilan uang
+     * @param amount Jumlah uang yang akan diambil
+     * @throws AmountOverDrawnException Apabila jumlah uang yang akan diambil melebihi jumlah uang dalam akun
      */
-    public boolean withdraw(int amount) throws AmountOverDrawnException
+    @Override
+    public void withdraw(double amount) throws AmountOverDrawnException
     {
-        if (balance - amount >= 100) {
-            if (Calendar.getInstance().before(endDate)) {
-                if ( (balance * 0.8) - amount >= 100 ) {
-                    balance *= 0.8;
-                    balance -= amount;
-                    return true;
-                } else {
-                    throw new AmountOverDrawnException(this);
-                }
-                
-            } else {
-                throw new AmountOverDrawnException(this);
-            }
-        } else {
+        if(amount > balance) {
             throw new AmountOverDrawnException(this);
         }
+        else if(Calendar.getInstance().getTime().before(endDate)) {
+            if(amount > (balance * 0.8)) {
+                throw new AmountOverDrawnException(this);
+            }
+            else {
+                balance = (balance * 0.8) - amount;
+            }
+        }
+        else {
+            balance = balance - amount;
+        }
     }
-
 }

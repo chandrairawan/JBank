@@ -1,23 +1,18 @@
-
-//Tambahan Modul 3
-import java.util.regex.Matcher;
+import java.util.regex.Matcher; //Tambahan Modul 3
 import java.util.regex.Pattern;
-
-//Modul 4
-import java.util.*;
-import java.text.*;
-
+import java.util.*;             //Modul 4
+import java.text.*; 
 import java.io.*;
 
 /**
  * JBank Program
- * Customer class
+ * Customer class menghasilkan Object Customer
  * 
  * @author Abdul Chandra Irawan - 1306405244
- * @version 16.04.2016
+ * @version 21.04.2016
  */
 
-public class Customer implements Serializable
+public class Customer implements Serializable, Comparable<Customer>
 {
     /**
      * Deklarasi variabel
@@ -26,60 +21,52 @@ public class Customer implements Serializable
      * variabel bertipe integer, yaitu variabel berisi angka dengan batasan -32768 sampai 32767
      */
     public Account[] accounts = new Account[4];
-    private Account a;
-    private String cityName;
-    private int custId;
-    private Date dateOfBirth;
-    private String email;
+    private int custID;
+    private int numOfAccounts;
+    private Date DOB;
     private String firstName;
     private String lastName;
-    private int numberOfCurrentAccounts; 
-    private String stAddress;
-    private String phoneNumber;
+    private String email;
+    private String phone;
+    private String cityAddress;
+    private String streetAddress;
+    private String stateAddress;
     private String zipOrPostalCode;
-    private int indexArrayAccount = 0;
-    private Date date;
-    private Boolean check;
-    
-    //Tambahan
-    private String emailVali;
-    private String emailRegex = "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$";
-    private Boolean boolVali;
+    private Pattern pattern;
+	
+	//Mengecek validasi alamat email
+    private transient Matcher matcher;
+    private static final String emailPattern = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+        + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
     
     /**
+     * Method addAccount untuk menambahkan account baru
+     * 
      * 
      */
-    public boolean addAccount (Account acct) throws AccountTypeAlreadyExistException
+    public void addAccount (double balance, Account acct) throws AccountTypeAlreadyExistsException
     {
-        boolean accountAdded = false, sameType = false;
-        int index = -1;
-        if ( numberOfCurrentAccounts < 5 ) {
-            for (int i = indexArrayAccount; i < 4; i++) {
-                if (accounts[i] == null && index == -1) {
-                    index = i;
-                } else if (accounts[i] != null ) {
-                    if (accounts[i].getClass().equals( acct.getClass() )){
-                        throw new AccountTypeAlreadyExistException(acct);
+        int i = 0;
+        if(numOfAccounts < 5) {
+            int notUsed = -1;
+            for(i = 0; i < accounts.length; i++) {
+                if(accounts[i] != null) {
+                    if(accounts[i].getClass().equals(acct.getClass())) {
+                        throw new AccountTypeAlreadyExistsException(acct);
                     }
                 }
+                else if(accounts[i] == null && notUsed == -1) {
+                    notUsed = i;
+                }
             }
-            if (!sameType && index != -1){
-                accounts[index] = acct;
-                accountAdded = true;
-                numberOfCurrentAccounts++;
-                indexArrayAccount++;
+            if(notUsed != -1) {
+                this.accounts[notUsed] = acct;
+                numOfAccounts++;
             }
         }
-        return accountAdded;
-        //return false;
-    }
-    
-    
-    /**
-     * Constructor Customer
-     */
-    public Customer()
-    { 
+        else {
+            System.out.println("Jumlah akun sudah maksimum!");
+        }
     }
     
     /**
@@ -91,17 +78,34 @@ public class Customer implements Serializable
        this(fname,lname, null);
     }
     
-    public Customer(String fname, String lname, Date dateOfBirth)
+    /**
+     * Method Constructor Customer
+     * @param firstName, lastName & DOB(DateOfBirth)
+     */
+    public Customer(String firstName, String lastName, Date DOB)
     {
-        this.firstName = fname;
-        this.lastName = lname;
-        this.dateOfBirth = dateOfBirth;
-        custId = Bank.getNextID();
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.DOB = DOB;
+        this.custID = Bank.getNextID();
     }
     
-    
-    public Customer(String firstName, String lastName, String DOB, int custId)
+    /**
+     * Method override untuk membandingkan ID customer
+     * @param c Customer
+     * @return 1, 0, atau -1 apabila ID lebih besar, sama dengan, atau lebih kecil
+     */
+    public int compareTo(Customer c)
     {
+        if(this.custID > c.custID) {
+            return 1;
+        }
+        else if(this.custID < c.custID) {
+            return -1;
+        }
+        else {
+            return 0;
+        }
     }
     
     /**
@@ -110,7 +114,7 @@ public class Customer implements Serializable
      */
     public Date getDateOfBirth()
     { 
-        return dateOfBirth;
+        return DOB;
     }
     
     /**
@@ -119,51 +123,94 @@ public class Customer implements Serializable
      */
     public String getAddress()
     {
-        return stAddress + " " + cityName+ " " + zipOrPostalCode;
-    }
+        String address = streetAddress + " " + cityAddress + " " + stateAddress + " " + zipOrPostalCode;
+        return address;
+	}
     
+	/**
+     * method getZipCode yang merupakan accessor kode pos alamat
+     * @return zipOrPostalCode
+     */
+    public String getZipCode()
+    {
+        return zipOrPostalCode;
+    }
+	
+	/**
+     * method getStreetAddress yang merupakan accessor alamat jalan
+     * @return streetAddress
+     */
+    public String getStreetAddress()
+    {
+        return streetAddress;
+    }
+	
+	/**
+     * method getStateAddress yang merupakan method accessor negara nasabah
+     * @return stateAddress
+     */
+    public String getStateAddress()
+    {
+        return stateAddress;
+    }
+	
+	/**
+     * Metode getCityAddress yang merupakan accessor alamat kota nasabah
+     * @return cityAddress
+     */
+    public String getCityAddress()
+    {
+        return cityAddress;
+    }
+	
     /**
-     * Membuat fungsi getAccount untuk menerima nama akun
-     * @return semua account yang dimiiki oleh satu customer
+     * method getAccount untuk menerima nama akun
+     * @param type
+	 * @return semua account yang dimiiki oleh satu customer
+	 * @throws AccountTypeNotFoundException
      */
     public Account getAccount(char type) throws AccountTypeNotFoundException
     {
-        Account acct = null;
-        for (Account acc: accounts ) {
-            switch (type) {
-                case 'S' : if( (acc instanceof Savings) && !(acc instanceof Investment) ) {
-                    acct = acc;
-                    return acct;
-                }
-                break;
-                case 'L' : if(acc instanceof LineOfCredit) {
-                    acct = acc;
-                    return acct;
-                }
-                break;
-                case 'O' : if(acc instanceof OverDraftProtection) {
-                    acct = acc;
-                    return acct;
-                }
-                break;
-                case 'I' : if(acc instanceof Investment) {
-                    acct = acc;
-                    return acct;
-                }
-                break;
-            }   
+        Account a = null;
+        int i = 0;
+        for(i = 0; i < accounts.length; i++) {
+            switch(type) {
+                case 'S': 
+                    if((accounts[i] instanceof Savings) && !(accounts[i] instanceof Investment)) {
+                        a = accounts[i];
+                        return a;
+                    }
+                    break;
+                case 'I': 
+                    if(accounts[i] instanceof Investment) {
+                        a = accounts[i];
+                        return a;
+                    }
+                    break;
+                case 'L': 
+                    if(accounts[i] instanceof LineOfCredit) {
+                        a = accounts[i];
+                        return a;
+                    }
+                    break;
+                case 'O': 
+                    if(accounts[i] instanceof OverDraftProtection) {
+                        a = accounts[i];
+                        return a;
+                    }
+                    break;
+            }
         }
-        //return acct;
         throw new AccountTypeNotFoundException(type);
     }
     
     /**
-     * membuat fungsi getCustomerId untuk menerima id pelanggan
-     * @return custId
+     * membuat fungsi getCustomerId untuk menerima ID pelanggan
+     * @return custID
      */
-    public int getCustId()
+    public int getCustID()
     {
-        return custId;
+        return custID;
     }
     
     /**
@@ -181,36 +228,64 @@ public class Customer implements Serializable
      */
     public String getName() 
     {
-        return lastName + "," + firstName +","+dateOfBirth;
-    }
+		String name = firstName + " " + lastName;
+        return name;
+	}
     
+	/**
+     * Metode accessor nama belakang nasabah
+     * @return Nama belakang
+     */
+    public String getLastName()
+    {
+        return lastName;
+    }
+	
+	/**
+     * Metode accessor nama depan nasabah
+     * @return Nama depan
+     */
+    public String getFirstName()
+    {
+        return firstName;
+    }
+	
     /**
-     * membuat fungsi getNumAccounts untuk menerima input nomer akun
-     * @return 0
+     * membuat fungsi getNumAccounts untuk menerima input jumlah akun
+     * @return numOfAccounts
      */
     public int getNumOfAccounts()
     {
-        return numberOfCurrentAccounts;
+        return numOfAccounts;
     }
     
     /**
-     * membuat fungsi getPhoneNumber, untuk menerima input nomer telepon
-     * @return phoneNumber
+     * membuat fungsi getPhone, untuk menerima input nomer telepon
+     * @return phone
      */
-    public String getPhoneNumber()
+    public String getPhone()
     {
-        return phoneNumber;
+        return phone;
     }
     
+	/**
+     * Metode accessor DOB
+     * @return DOB
+     */
+    public Date getDOB()
+    {
+        return DOB;
+    }
+	
     /**
      * membuat fungsi setaddress dengan variabel street,city dan code
-     * @param street, city, dan code
-     * @return 
+     * @param street, city, state dan code
      */
-    public void setAddress(String street, String city, String code) 
+    public void setAddress(String street, String city, String state, String code) 
     {
-        this.stAddress = street;
-        this.cityName = city;
+        this.streetAddress = street;
+        this.cityAddress = city;
+        this.stateAddress = state;
         this.zipOrPostalCode = code;
     }
     
@@ -220,14 +295,10 @@ public class Customer implements Serializable
      */
     public void setEmail(String emailAddress) 
     {
-        emailVali = emailAddress;
-        boolVali = emailVali.matches(emailRegex);
+        pattern = Pattern.compile(emailPattern);
+        matcher = pattern.matcher(emailAddress);
         
-        if (boolVali == false){
-            System.out.println("False");
-        }
-        else if(boolVali == true){
-            System.out.println("True");
+        if(matcher.matches()) {
             this.email = emailAddress;
         }
     }
@@ -246,128 +317,123 @@ public class Customer implements Serializable
      * memasukkan tanggal lahir nasabah
      * @param dob
      */
-    public void setDateOfBirth(Date dateOfBirth)
+    public void setDOB(Date DOB)
     {
-        dateOfBirth = dateOfBirth;
+        this.DOB = DOB;
     }
     
     /**
      * membuat fungsi sePhoneNumber 
      * @return phoneNum
      */
-    public void setPhoneNumber(String phoneNum) 
+    public void setPhone(String phonenum)
     {
-        this.phoneNumber = phoneNum;
+        this.phone = phonenum;
     }
     
     /**
-     * membuat fungsi setAccount untuk membuat account baru
-     * @param new Account()
-     *//*
-    public void setAccount(Account account) { 
-        accounts = new Account();
-    }*/
-    
-    /**
-     * Method untuk meng-set Customer ID
-     * 
+     * Method untuk meng-set Customer id
+     * @param id 
      */
-    public void setCustId(int id)
+    public void setCustID(int id)
     {
-        custId=id;
+        this.custID=id;
     }
     
     /**
      * Method untuk menghapus sebuah Account
-     * @return false
+     * @param type
+	 * @return true, false
+     * @throws AccountTypeNotFoundException
      */
-    public boolean removeAccount(char type)
+    public boolean removeAccount(char type)throws AccountTypeNotFoundException
     {
         Account a = null;
-        boolean accountRemoved = false;
-        for (int i = 0; i<=3; i++) {
-            switch (type) {
-                case 'S' : if ( accounts[i] instanceof Savings && !(accounts[i] instanceof Investment)) {
-                    accounts[i] = null;
-                    indexArrayAccount--;
-                    numberOfCurrentAccounts--;
-                    accountRemoved = true;
-                }
-                break;
-                case 'L' : if ( accounts[i] instanceof LineOfCredit) {
-                    accounts[i] = null;
-                    indexArrayAccount--;
-                    numberOfCurrentAccounts--;
-                    accountRemoved = true;
-                }
-                break;
-                case 'O' : if ( accounts[i] instanceof OverDraftProtection) {
-                    accounts[i] = null;
-                    indexArrayAccount--;
-                    numberOfCurrentAccounts--;
-                    accountRemoved = true;
-                }
-                break;
-                case 'I' : if ( accounts[i] instanceof Investment) {
-                    accounts[i] = null;
-                    indexArrayAccount--;
-                    numberOfCurrentAccounts--;
-                    accountRemoved = true;
-                }
-                break;
+        boolean acctRemoved = false;
+        int i = 0;
+        for(i = 0; i < accounts.length; i++) {
+            switch(type) {
+                case 'S': 
+                    if((accounts[i] instanceof Savings) && !(accounts[i] instanceof Investment)) {
+                        accounts[i] = null;
+                        numOfAccounts--;
+                        acctRemoved = true;
+                    }
+                    break;
+                case 'I': 
+                    if(accounts[i] instanceof Investment) {
+                        accounts[i] = null;
+                        numOfAccounts--;
+                        acctRemoved = true;
+                    }
+                    break;
+                case 'L': 
+                    if(accounts[i] instanceof LineOfCredit) {
+                        accounts[i] = null;
+                        numOfAccounts--;
+                        acctRemoved = true;
+                    }
+                    break;
+                case 'O': 
+                    if(accounts[i] instanceof OverDraftProtection) {
+                        accounts[i] = null;
+                        numOfAccounts--;
+                        acctRemoved = true;
+                    }
+                    break;
             }
             
-            if (accounts[i] == null && accountRemoved) {
-                if ( i != 3) {
+            if(accounts[i] == null && acctRemoved) {
+                if(i < accounts.length - 1) {
                     a = accounts[i];
-                    accounts[i] = accounts [i+1];
-                    accounts [i+1] = a;
+                    accounts[i] = accounts[i+1];
+                    accounts[i+1] = a;
                 }
+                return acctRemoved;
             }
         }
-        return accountRemoved;
+        throw new AccountTypeNotFoundException(type);
     }
     
     /**
-     * @return null
+     * Method toString untuk menampilkan info customer
+	 * @return String
      */
     public String toString()
     {
-        SimpleDateFormat ft = new SimpleDateFormat ("dd/MM/yyyy");
-        System.out.println("Customer ID   :   " + custId);
-        System.out.println("First Name    :   " + firstName);
-        System.out.println("Last Name     :   " + lastName);
-        System.out.println("City Address  :   " + cityName);
-        System.out.println("Stret Address :   " + stAddress);
-        System.out.println("Email         :   " + email);
-        System.out.println("Phone Number  :   " + phoneNumber);
-        System.out.println("Zip / Postal  :   " + zipOrPostalCode);
-        System.out.println("DOB           :   " + ft.format(dateOfBirth));
-        System.out.println("Account       :");
-        /*
-        for (Account a : accounts) {
-            if ( a!= null) {
-                switch (a.getAcctType()) {
-                    case 'S': System.out.println("          SAVINGS, " + a.getBalance());
-                              break;
-                    case 'O': System.out.println("          OVERDRAFT, " + a.getBalance());
-                              break;
-                    case 'I': System.out.println("          INVESTMENT, " + a.getBalance());
-                              break;
-                    case 'L': System.out.println("          LINEOFCREDIT, " + a.getBalance());
-                              break;
-                    default : System.out.println("          Belum Membuat");
-                }
-            }
+        SimpleDateFormat dobFormat = new SimpleDateFormat("dd MMM yyyy");
+        System.out.println("Informasi Kostumer");
+        System.out.println("Nama                    : " + this.getName());
+        try {
+            System.out.println("DOB                     : " + dobFormat.format(this.getDOB()));
+        } catch (NullPointerException e) {
+            System.out.println("DOB                     : ");
         }
-        System.out.println("");*/
+        System.out.println("No Telepon              : " + this.getPhone());
+        System.out.println("Email                   : " + this.getEmail());
+        System.out.println("Address                 : " + this.getAddress());
+        System.out.println("ID Customer             : " + this.getCustID());
+        System.out.println("Informasi Akun Kostumer");
+        try {
+            System.out.println("Balance Savings         : " + this.getAccount('S').getBalance());
+        } catch (AccountTypeNotFoundException e) {
+            System.out.println("Customer tidak memiliki account Savings");
+        }
+        try {
+            System.out.println("Balance Investment      : " + this.getAccount('I').getBalance());
+        } catch (AccountTypeNotFoundException e) {
+            System.out.println("Customer tidak memiliki account Investment");
+        }
+        try {
+            System.out.println("Balance Line-of-Credit  : " + this.getAccount('L').getBalance());
+        } catch (AccountTypeNotFoundException e) {
+            System.out.println("Customer tidak memiliki account Line-of-Credit");
+        }
+        try {
+            System.out.println("Balance Overdraft       : " + this.getAccount('O').getBalance());
+        } catch (AccountTypeNotFoundException e) {
+            System.out.println("Customer tidak memiliki account Overdraft");
+        }
         return "";
-    }
-    
-    public void printAllAccounts() {
-        for (Account a : accounts) {
-            if (a!=null)
-                System.out.println(a);
-        }
     }
 }

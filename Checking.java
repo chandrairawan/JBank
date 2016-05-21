@@ -1,9 +1,9 @@
 
 /**
- * Class Checking.
+ * Class Checking, merupakan class abstract yang memodelkan Account Checking
  * 
- * @author Abdul Chandra Irawan 
- * @version 16.04.2016
+ * @author Abdul Chandra Irawan - 1306405244
+ * @version 21.04.2016
  */
 public abstract class Checking extends Account 
 {
@@ -16,7 +16,6 @@ public abstract class Checking extends Account
     
     /**
      * Method resetMonthlyFee
-     * 
      * @param monthlyFee = 0
      */
     public void resetMonthlyFee() 
@@ -26,7 +25,6 @@ public abstract class Checking extends Account
     
     /**
      * Method getMonthlyFee
-     * 
      * @return monthlyFee
      */
     public double getMonthlyFee() 

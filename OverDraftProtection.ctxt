@@ -1,11 +1,11 @@
 #BlueJ class context
-comment0.params=cust\ amount\ save
+comment0.params=cust\ amount\ savingsAccount
 comment0.target=OverDraftProtection(Customer,\ double,\ Savings)
-comment0.text=\r\n\ Constructor\ OverDraftProtection\r\n\ \r\n\ @param\ cust.getCustId()\r\n\ @param\ amount\r\n\ @param\ save\r\n
+comment0.text=\r\n\ Constructor\ for\ objects\ of\ class\ OverDraftProtection\r\n\ \r\n\ @param\ cust.getCustId(),\ amount\ &\ save\r\n
 comment1.params=
 comment1.target=void\ feeAssessment()
-comment1.text=\r\n\ method\ feeAssessment\r\n
+comment1.text=\r\n\ method\ feeAssessment\ untuk\ menghitung\ monthly\ fee\r\n
 comment2.params=amount
-comment2.target=boolean\ withdraw(double)
-comment2.text=\r\n\ Method\ Withdraw\r\n\ \r\n\ @param\ amount\r\n
+comment2.target=void\ withdraw(double)
+comment2.text=\r\n\ Method\ Withdraw\ untuk\ melakukan\ pengambilan\ uang\r\n\ \r\n\ @param\ amount\ Jumlah\ uang\ yang\ akan\ diambil\r\n\ @throws\ AmountOverDrawnException\ Apabila\ jumlah\ uang\ yang\ akan\ diambil\ melebihi\ jumlah\ uang\ dalam\ akun\r\n
 numComments=3

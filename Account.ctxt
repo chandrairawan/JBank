@@ -1,22 +1,20 @@
 #BlueJ class context
 comment0.params=amount
 comment0.target=boolean\ deposit(double)
-comment0.text=\r\n\ membuat\ fungsi\ deposit\r\n\ @param\ amount\ tidak\ boleh\ negatif\r\n\ @return\ true,\ false\r\n
+comment0.text=\r\n\ membuat\ fungsi\ deposit\r\n\ @param\ (amount)\ uang\ yang\ simpan\ tidak\ boleh\ negatif\r\n\ @return\ true,\ false\r\n
 comment1.params=
 comment1.target=double\ getBalance()
 comment1.text=\r\n\ membuat\ fungsi\ getBalance\r\n\ @return\ balance\r\n
 comment2.params=
 comment2.target=java.lang.String\ getId()
-comment2.text=\r\n\ membuat\ fungsi\ getId\r\n\ @return\ id\r\n
+comment2.text=\r\n\ membuat\ fungsi\ getId\r\n\ @return\ ID\r\n
 comment3.params=amount
 comment3.target=void\ setBalance(double)
 comment3.text=\r\n\ membuat\ fungsi\ setBalance\r\n\ @param\ amount\ untuk\ atribut\ objek\ balance\r\n
 comment4.params=amount
-comment4.target=boolean\ withdraw(double)
+comment4.target=void\ withdraw(double)
 comment4.text=\r\n\ membuat\ fungsi\ withdraw\r\n\ @param\ amount,\ jumlah\ penarikan\ tidak\ boleh\ membuat\ balance\ menjadi\ negatif\r\n\ @return\ true,\ false\r\n
 comment5.params=
 comment5.target=java.lang.String\ toString()
-comment6.params=balance\ rate\ compound\ period
-comment6.target=double\ futureValue(double,\ double,\ double,\ double)
-comment6.text=\r\n
-numComments=7
+comment5.text=\r\n\ Metode\ untuk\ mendapatkan\ no\ ID\r\n\ @return\ No\ ID\r\n
+numComments=6
